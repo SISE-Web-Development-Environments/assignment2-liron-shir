@@ -1,0 +1,65 @@
+body
+{
+	background-color: rgb(241, 195, 247);
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: center;
+	font-family: Comic Sans MS, cursive, sans-serif;
+	font-size: initial;
+    text-align: center;
+
+}
+#header{
+    border: 1px solid black;
+    background-color: rgb(241, 204, 236);
+}
+#menu
+{
+    float: inline-start;
+}
+li {
+	border: 5px solid #e7e7e7;
+	background-color: #f3f3f3;
+	border-right: 10px solid #bbb;
+	border-radius: 20px;
+    list-style-type: none;
+    display: inline-block;
+  }
+a{
+    font-size: 20px;
+    font-weight: bold;
+	color: black;
+    padding: 14px 16px;
+}
+li :hover {
+    background-color: rgb(250, 220, 165);
+    border-radius: 20px;
+    opacity: 1;
+    cursor:pointer;
+  }
+.foot{
+    margin:0;
+    display:inline;
+    font-weight:none;
+    font-size: 18px;
+}
+footer
+{
+	background:  #c695f7;
+	position: fixed;
+	bottom: 0;
+	left: 0px;
+	width: 100%;
+    height: 45px;
+    text-align: center;
+} 
+
+
+
+  /* for canves */
+  @media screen and (max-height: 768px){
+        #canvas{
+        width: 25%;
+  }
+} 

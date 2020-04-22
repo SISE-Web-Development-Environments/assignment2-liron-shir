@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script src="./jquery-3.4.1.slim.min.js"></script>
-		<script type="text/javascript" src="./app.js"></script>
+		<script src="javascript/jquery-3.4.1.slim.min.js"></script>
+		<script type="text/javascript" src="javascript/app.js"></script>
+		<script src="javascript/functions.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 
 	<body>
+		<div id="header">
+			<p></p>
+			<p><img src="images/pac1.png" width="100px"> Shir Ben-Dor 204675797 <img src="images/pac2.png" width="200px"> Liron Ben-Yakov 204385884 <img src="images/pac3.png" width="80px"></p>
+		</div>
+		<br>
+		<div id="menu">
+			<li><a onclick="welcome()">Welcome</a></li>
+			<li><a onclick="register()">Register</a></li>
+			<li><a onclick="login()">Login</a></li>
+			<li><a onclick="about()">About</a></li>
+		</div>
+		<br>
+		<div id="content">
+		<div id="welcomeDiv">
+				<button id="loginButton" onclick="login()">Login</button>
+				<button id="registerButton" onclick="register()">Register</button>
+		</div>
+		<div id="registerDiv">
+		</div>
+		<div id="loginDiv"></div>
+		<div id="aboutDiv"></div>
+		</div>
+		<div id="canvesDiv">
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
 			<input id="lblScore" type="text" />
@@ -16,6 +41,12 @@
 		</div>
 		<div id="game">
 			<canvas id="canvas" height="600" width="600"></canvas>
+		</div>
+		</div>
+		<br>
+		<footer>
+			<span class="foot">Contact us : <b>Liron:</b> oskar@post.bgu.ac.il , <b>Shir:</b> bendsh@post.bgu.ac.il</span>
+		</footer>
 		</div>
 	</body>
 </html>

@@ -1,52 +1,92 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<script src="javascript/jquery-3.4.1.slim.min.js"></script>
-		<script type="text/javascript" src="javascript/app.js"></script>
-		<script src="javascript/functions.js"></script>
-		<link rel="stylesheet" type="text/css" href="style.css">
-	</head>
 
-	<body>
-		<div id="header">
-			<p></p>
-			<p><img src="images/pac1.png" width="100px"> Shir Ben-Dor 204675797 <img src="images/pac2.png" width="200px"> Liron Ben-Yakov 204385884 <img src="images/pac3.png" width="80px"></p>
-		</div>
-		<br>
-		<div id="menu">
-			<li><a onclick="welcome()">Welcome</a></li>
-			<li><a onclick="register()">Register</a></li>
-			<li><a onclick="login()">Login</a></li>
-			<li><a onclick="about()">About</a></li>
-		</div>
-		<br>
-		<div id="content">
+<head>
+	<script src="javascript/jquery-3.4.1.slim.min.js"></script>
+	<script type="text/javascript" src="javascript/app.js"></script>
+	<script src="javascript/functions.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<div id="header">
+		<p></p>
+		<p><img src="images/pac1.png" width="100px"> Shir Ben-Dor 204675797 <img src="images/pac2.png" width="200px">
+			Liron Ben-Yakov 204385884 <img src="images/pac3.png" width="80px"></p>
+	</div>
+	<br>
+	<div id="menu">
+		<li><a onclick="welcome()">Welcome</a></li>
+		<li><a onclick="register()">Register</a></li>
+		<li><a onclick="login()">Login</a></li>
+		<li><a onclick="about()">About</a></li>
+	</div>
+	<br>
+	<div id="content">
 		<div id="welcomeDiv">
-				<button id="loginButton" onclick="login()">Login</button>
-				<button id="registerButton" onclick="register()">Register</button>
+			<button id="loginButton" onclick="login()">Login</button>
+			<button id="registerButton" onclick="register()">Register</button>
 		</div>
+
 		<div id="registerDiv">
+			<form class="cmxform" id="signupForm"  >
+				<fieldset>
+					<legend>Validating a complete form</legend>
+					<p>
+						<label for="firstname">Firstname</label>
+						<input id="firstname" name="firstname" type="text">
+					</p>
+					<p>
+						<label for="lastname">Lastname</label>
+						<input id="lastname" name="lastname" type="text">
+					</p>
+					<p>
+						<label for="username">Username</label>
+						<input id="username" name="username" type="text">
+					</p>
+					<p>
+						<label for="password">Password</label>
+						<input id="password" name="password" type="password">
+					</p>
+					<p>
+						<label for="confirm_password">Confirm password</label>
+						<input id="confirm_password" name="confirm_password" type="password">
+					</p>
+					<p>
+						<label for="email">Email</label>
+						<input id="email" name="email" type="email">
+					</p>
+					<label class="firstname">Date of Birth </label>
+					<input type="date" name="birth" id="birth" placeholder="Enter your date of birth">
+				</fieldset>
+				<p>
+					<input class="submit" type="submit" value="Submit">
+				</p>
+				</fieldset>
+			</form>
 		</div>
 		<div id="loginDiv"></div>
 		<div id="aboutDiv"></div>
-		</div>
+
 		<div id="canvesDiv">
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
+			<div id="score">
+				<label for="lblScore">SCORE:</label>
+				<input id="lblScore" type="text" />
+			</div>
+			<div id="time">
+				<label for="lblTime">TIME:</label>
+				<input id="lblTime" type="text" />
+			</div>
+			<div id="game">
+				<canvas id="canvas" height="600" width="600"></canvas>
+			</div>
 		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
-		</div>
-		<div id="game">
-			<canvas id="canvas" height="600" width="600"></canvas>
-		</div>
-		</div>
+	</div>
 		<br>
 		<footer>
-			<span class="foot">Contact us : <b>Liron:</b> oskar@post.bgu.ac.il , <b>Shir:</b> bendsh@post.bgu.ac.il</span>
+			<span class="foot">Contact us : <b>Liron:</b> oskar@post.bgu.ac.il , <b>Shir:</b>
+				bendsh@post.bgu.ac.il</span>
 		</footer>
-		</div>
-	</body>
+</body>
+
 </html>

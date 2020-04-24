@@ -13,6 +13,9 @@ users.push(defaultUser);
 var users = {};
 users["p"] = "p";*/
 /* */
+function test(){
+
+}
 function welcome(){
   $("#welcomeDiv").show();
   $("#loginDiv").hide();
@@ -35,23 +38,23 @@ function register(){
 function loginButton(){
   var userCheck=document.getElementById("userName").value;
   var passwordCheck=document.getElementById("passWord").value;
+  alert(userCheck);
+  alert(users.length);
   for(var i=0;i<users.length;i++){
     if(users[i].username===userCheck){
       if(users[i].password === passwordCheck){
         user=users[i];
-        alert("Succeeded")
         $("#loginDiv").hide();
-        $("#settingDiv").show();
-      
+        $("#userSettings").show();
+        alert("Succeeded")
+        return;
       }
-      else{
+      else
         alert("Wrong password. \nPlease try again");
-        $("#loginDiv").show();
-       
-      }
+        return;
     }
   }
-     alert("User does not exist in the system.");
+  alert("User does not exist in the system.");
 /*
   if(!(userCheck in users)){
       alert("username does not exist")
@@ -71,13 +74,11 @@ function loginButton(){
 }
 
 /*start page with welcome */
-$(document).ready(function() {
+$(document).ready(function start() {
     $("#welcomeDiv").show();
     $("#loginDiv").hide();
     $("#registerDiv").hide();
-    $("#canvesDiv").hide();
-    $("#settingDiv").hide();
-
+    $("#canvesDiv").hide()
 });
 /*exit from Model Dialog with esc*/
 $(document).keydown(function(e) { 

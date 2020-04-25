@@ -10,6 +10,15 @@ var users = [];
 var defaultUser = { firstname: "p", lastName: "p", username: "p", password: "p", email: "p@example.com", birth: "1/1/1990" };
 users.push(defaultUser);
 
+/*start page with welcome*/
+$(document).ready(function () {
+  $("#welcomeDiv").show();
+  $("#loginDiv").hide();
+  $("#registerDiv").hide();
+  $("#settingDiv").hide();
+  $("#canvesDiv").hide();
+});
+
 function welcome() {
   $("#welcomeDiv").show();
   $("#loginDiv").hide();
@@ -45,51 +54,33 @@ function setting() {
 
 /*login form*/
 function loginButton(element) {
-  var userCheck = document.getElementById("userName").value;
-  var passwordCheck = document.getElementById("passWord").value;
+  var userCheck = document.getElementById("checkUsername").value;
+  var passwordCheck = document.getElementById("checkPassword").value;
   for (var i = 0; i < users.length; i++) {
     if (users[i].username === userCheck) {
       if (users[i].password === passwordCheck) {
         user = users[i];
         alert("Succeeded");
-        clearFiledsLogin();
+        clearFiledsLogin()
         setting();
         return;
       }
       else{
         alert("Wrong password. \nPlease try again");
-        clearFiledsLogin();
+        clearFiledsLogin()
         return login();
     }
   }
   }
     alert("User does not exist in the system");
-    clearFiledsLogin();
+    clearFiledsLogin()
   }
-  /*Clear fields in login form*/
+/*Clear fields in login form*/
   function clearFiledsLogin(){
-    $("#userName").val("");
-    $("#passWord").val("");
-  }
-  /*Clear fields in registration form*/
-  function clearFiledsRegister(){
-    $("#firstname").val("");
-    $("#lastname").val("");
-    $("#username").val("");
-    $("#password").val("");
-    $("#email").val("");
-    $("#birth").val("");
-  }
+    $("#checkUsername").val("");
+    $("#checkPassword").val("");
 
-/*start page with welcome*/
-$(document).ready(function () {
-  $("#welcomeDiv").show();
-  $("#loginDiv").hide();
-  $("#registerDiv").hide();
-  $("#settingDiv").hide();
-  $("#canvesDiv").hide();
-});
-
+  }
 
 /*exit from Model Dialog with esc*/
 $(document).keydown(function (e) {
@@ -183,7 +174,7 @@ $().ready(function () {
       newUser.birth = $("#birth").val();
       users.push(newUser);
       alert(newUser.username + " has been created ");
-      clearFiledsRegister();
+      document.getElementById("signupForm").reset();
       login();
     }
   });
@@ -197,6 +188,7 @@ $().ready(function () {
     }
   });*/
 });
+
 /*functions for validation data in registrtion*/
 /*valid password - at least one letter and one number*/
 jQuery.validator.addMethod("checkPassword", function (value, element) {

@@ -1,100 +1,111 @@
 var user = {
-  firstname:"",
-  lastName:"",
+  firstname: "",
+  lastName: "",
   username: "",
   password: "",
-  email:"",
-  birth:""
+  email: "",
+  birth: ""
 };
-var users =[];
-var defaultUser = {firstname:"p", lastName:"p",username:"p",password:"p",email:"p@example.com",birth:"1/1/1990"};
+var users = [];
+var defaultUser = { firstname: "p", lastName: "p", username: "p", password: "p", email: "p@example.com", birth: "1/1/1990" };
 users.push(defaultUser);
-/*
-var users = {};
-users["p"] = "p";*/
-/* */
-function test(){
 
-}
-function welcome(){
+function welcome() {
   $("#welcomeDiv").show();
   $("#loginDiv").hide();
   $("#registerDiv").hide();
+  $("#settingDiv").hide();
+  $("#canvesDiv").hide();
+  
 }
 
-function login(){
+function login() {
   $("#welcomeDiv").hide();
   $("#loginDiv").show();
   $("#registerDiv").hide();
+  $("#settingDiv").hide();
+  $("#canvesDiv").hide();
 }
 
-function register(){
+function register() {
   $("#welcomeDiv").hide();
   $("#loginDiv").hide();
   $("#registerDiv").show();
+  $("#settingDiv").hide();
+  $("#canvesDiv").hide();
 }
 
-/*login*/
-function loginButton(){
-  var userCheck=document.getElementById("userName").value;
-  var passwordCheck=document.getElementById("passWord").value;
-  alert(userCheck);
-  alert(users.length);
-  for(var i=0;i<users.length;i++){
-    if(users[i].username===userCheck){
-      if(users[i].password === passwordCheck){
-        user=users[i];
-        $("#loginDiv").hide();
-        $("#userSettings").show();
-        alert("Succeeded")
+function setting() {
+  $("#welcomeDiv").hide();
+  $("#loginDiv").hide();
+  $("#registerDiv").hide();
+  $("#settingDiv").show();
+  $("#canvesDiv").hide();
+}
+
+/*login form*/
+function loginButton(element) {
+  var userCheck = document.getElementById("userName").value;
+  var passwordCheck = document.getElementById("passWord").value;
+  for (var i = 0; i < users.length; i++) {
+    if (users[i].username === userCheck) {
+      if (users[i].password === passwordCheck) {
+        user = users[i];
+        alert("Succeeded");
+        clearFiledsLogin();
+        setting();
         return;
-      }
-      else
-        alert("Wrong password. \nPlease try again");
-        return;
-    }
-  }
-  alert("User does not exist in the system.");
-/*
-  if(!(userCheck in users)){
-      alert("username does not exist")
-          return;
-      }
-  else{
-      if (users[userCheck] == passwordCheck) {
-          user=userCheck;
-          $("#loginDiv").hide();
-          $("#userSettings").show();
       }
       else{
-        alert("Password is invalid. \nPlease try again");
-          return;
-      }
-  }*/
-}
+        alert("Wrong password. \nPlease try again");
+        clearFiledsLogin();
+        return login();
+    }
+  }
+  }
+    alert("User does not exist in the system");
+    clearFiledsLogin();
+  }
+  /*Clear fields in login form*/
+  function clearFiledsLogin(){
+    $("#userName").val("");
+    $("#passWord").val("");
+  }
+  /*Clear fields in registration form*/
+  function clearFiledsRegister(){
+    $("#firstname").val("");
+    $("#lastname").val("");
+    $("#username").val("");
+    $("#password").val("");
+    $("#email").val("");
+    $("#birth").val("");
+  }
 
-/*start page with welcome */
-$(document).ready(function start() {
-    $("#welcomeDiv").show();
-    $("#loginDiv").hide();
-    $("#registerDiv").hide();
-    $("#canvesDiv").hide()
+/*start page with welcome*/
+$(document).ready(function () {
+  $("#welcomeDiv").show();
+  $("#loginDiv").hide();
+  $("#registerDiv").hide();
+  $("#settingDiv").hide();
+  $("#canvesDiv").hide();
 });
+
+
 /*exit from Model Dialog with esc*/
-$(document).keydown(function(e) { 
-  if (e.keyCode == 27) { 
-      $("#closeModel").click();
-  } 
+$(document).keydown(function (e) {
+  if (e.keyCode == 27) {
+    $("#closeModel").click();
+  }
 });
 
 /*form of registration*/
 $.validator.setDefaults({
-  submitHandler: function() {
+  submitHandler: function () {
     alert("submitted!");
   }
 });
 
-$().ready(function() {
+$().ready(function () {
   // validate the comment form when it is submitted
   $("#commentForm").validate();
 
@@ -136,7 +147,7 @@ $().ready(function() {
       firstname: {
         required: "Please enter your first name",
         checkName: "Your name should contain only letter"
-        
+
       },
       lastname: {
         required: "Please enter your last name",
@@ -162,17 +173,18 @@ $().ready(function() {
       },
       email: "Please enter a valid email address",
     },
-    submitHandler: function(form,event){
+    submitHandler: function (form, event) {
       var newUser = Object.create(user);
-      newUser.firstName = $("#firstName").val();
-      newUser.lastName = $("#lastName").val();
+      newUser.firstName = $("#firstname").val();
+      newUser.lastName = $("#lastname").val();
       newUser.username = $("#username").val();
       newUser.password = $("#password").val();
       newUser.email = $("#email").val();
       newUser.birth = $("#birth").val();
       users.push(newUser);
-      alert(newUser.username+" has been created ");
-      clearFields();
+      alert(newUser.username + " has been created ");
+      clearFiledsRegister();
+      login();
     }
   });
   // propose username by combining first- and lastname
@@ -185,19 +197,19 @@ $().ready(function() {
     }
   });*/
 });
-   /*functions for validation data in registrtion*/
-  /*valid password - at least one letter and one number*/
-jQuery.validator.addMethod("checkPassword", function(value, element) {
+/*functions for validation data in registrtion*/
+/*valid password - at least one letter and one number*/
+jQuery.validator.addMethod("checkPassword", function (value, element) {
   return /^(?=.*[a-zA-Z])(?=.*\d).*$/.test(value) && /^[0-9a-zA-Z]+$/.test(value);
 }),
 
-/*valid first name and last name*/
-jQuery.validator.addMethod("checkName", function(value, element) {
-  return /^[^0-9]+$/.test(value);
-}),
+  /*valid first name and last name*/
+  jQuery.validator.addMethod("checkName", function (value, element) {
+    return /^[^0-9]+$/.test(value);
+  }),
 
-/*legal date*/
-jQuery.validator.addMethod("checkDate", function(value, element) {
-    return Date.now() - new Date(value).getTime()>0;
-});
+  /*legal date*/
+  jQuery.validator.addMethod("checkDate", function (value, element) {
+    return Date.now() - new Date(value).getTime() > 0;
+  });
 

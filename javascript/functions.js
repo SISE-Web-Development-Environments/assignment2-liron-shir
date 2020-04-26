@@ -51,6 +51,15 @@ function setting() {
   $("#settingDiv").show();
   $("#canvesDiv").hide();
 }
+function game() {
+  $("#welcomeDiv").hide();
+  $("#loginDiv").hide();
+  $("#registerDiv").hide();
+  $("#settingDiv").hide();
+  $("#canvesDiv").show();
+  $("#welcome_user").text("Welcome" +"\u00A0" + user.username);
+
+}
 
 /*login form*/
 function loginButton(element) {

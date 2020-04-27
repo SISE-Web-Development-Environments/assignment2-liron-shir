@@ -1,13 +1,17 @@
 var context;
 var shape = new Object();
-var board;
 var score;
 var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
 var mouth_pacman;
-var monsters = [{ x: 0, y: 0, img: "./images/pink.ico", xPrev: 0, yPrev: 0 }, { x: 9, y: 9, img: "./images/red.png", xPrev: 9, yPrev: 9 }, { x: 0, y: 9, img: "./images/blue.ico", xPrev: 0, yPrev: 9 }, { x: 9, y: 0, img: "./images/green.jpg", xPrev: 9, yPrev: 0 }];
+var food_remain = 50;
+var monsters = [{ x: 1, y: 1, img: "./images/pink.ico", xPrev: 1, yPrev: 1 }, { x: 18, y: 18, img: "./images/red.png", xPrev: 18, yPrev: 18 }, { x: 1, y: 18, img: "./images/blue.ico", xPrev: 1, yPrev: 18 }, { x: 18, y: 1, img: "./images/green.jpg", xPrev: 18, yPrev: 1 }];
+var board;
+var ball5 = 0.6*food_remain;
+var ball15 = 0.3*food_remain;
+var ball25 = 0.1*food_remain;
 
 
 $(document).ready(function() {
@@ -21,11 +25,32 @@ function Start() {
 	score = 0;
 	pac_color = "red";
 	var cnt = 100; //%
-	var food_remain = 50;
+	food_remain = 50;
 	var pacman_remain = 1;//init pacman
 	start_time = new Date();
-	for (var i = 0; i < 10; i++) {
-		board[i] = new Array();
+	board = [
+		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+		[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 4, 0, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 0, 0, 4],
+		[4, 0, 4, 0, 4, 0, 4, 0, 0, 4, 0, 4, 0, 4, 0, 0, 4, 0, 0, 4],
+		[4, 0, 4, 0, 4, 0, 4, 0, 4, 4, 0, 4, 0, 4, 4, 0, 4, 0, 0, 4],
+		[4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 4, 4, 0, 4, 0, 4, 4],
+		[4, 0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4],
+		[4, 0, 4, 4, 4, 0, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 0, 0, 4],
+		[4, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4],
+		[4, 0, 4, 4, 4, 0, 4, 0, 4, 4, 0, 4, 0, 0, 4, 0, 4, 0, 0, 4],
+		[4, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 4, 4],
+		[4, 0, 0, 0, 0, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 0, 0, 0, 4],
+		[4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 4, 0, 4],
+		[4, 0, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4],
+		[4, 0, 0, 0, 4, 0, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 0, 4],
+		[4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4],
+		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+	];
+	/*for (var i = 0; i < 10; i++) {
+		//board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) {
 			if (
@@ -52,12 +77,18 @@ function Start() {
 				cnt--;// no criti
 			}
 		}
-	}
+	}*/
+	var emptyCell = findRandomEmptyCell(board);
+	shape.i = emptyCell[0];
+    shape.j = emptyCell[1];
+	board[emptyCell[0]][emptyCell[1]] = 2; //pacmen
+	
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 1;
+		board[emptyCell[0]][emptyCell[1]] = 1; //food
 		food_remain--;
 	}
+
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -77,11 +108,11 @@ function Start() {
 }
 
 function findRandomEmptyCell(board) {
-	var i = Math.floor(Math.random() * 9 + 1);
-	var j = Math.floor(Math.random() * 9 + 1);
+	var i = Math.floor(Math.random() * 19 + 1);
+	var j = Math.floor(Math.random() * 19 + 1);
 	while (board[i][j] != 0) {
-		i = Math.floor(Math.random() * 9 + 1);
-		j = Math.floor(Math.random() * 9 + 1);
+		i = Math.floor(Math.random() * 19 + 1);
+		j = Math.floor(Math.random() * 19 + 1);
 	}
 	return [i, j];
 }
@@ -105,8 +136,8 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
-	for (var i = 0; i < 10; i++) {
-		for (var j = 0; j < 10; j++) {
+	for (var i = 0; i < 20; i++) {
+		for (var j = 0; j < 20; j++) {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
@@ -194,8 +225,6 @@ function Draw() {
         pic.height = "20px";
         pic.src = mon.img;
         context.drawImage(pic, mon.x * 60, mon.y * 60, 60, 60);
-        if (mon.x == shape.i && mon.y == shape.j) 
-         //   pacMeetMonst();
 	}
 }
 
@@ -211,7 +240,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 2) {
-		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {//down
+		if (shape.j < 20 && board[shape.i][shape.j + 1] != 4) {//down
 			shape.j++;
 			mouth_pacman=2;
 		}
@@ -223,7 +252,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 4) {
-		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {//right
+		if (shape.i < 20 && board[shape.i + 1][shape.j] != 4) {//right
 			shape.i++;
 			mouth_pacman=4;
 		}
@@ -237,7 +266,7 @@ function UpdatePosition() {
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if (score == 50) {
+	if (score == food_remain) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	} else {

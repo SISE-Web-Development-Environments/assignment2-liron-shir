@@ -53,8 +53,7 @@ function game() {
   $("#registerDiv").hide();
   $("#settingDiv").hide();
   $("#canvesDiv").show();
-  $("#welcome_user").text("Welcome" +"\u00A0" + user.username);
-
+  $("#welcome_user").text("Welcome" +"\u00A0" + user.username + "!");
 }
 
 /*login form*/

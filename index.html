@@ -12,38 +12,41 @@
 	<script src="javascript/jquery-3.4.1.slim.min.js"></script>
 	<script type="text/javascript" src="javascript/app.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 	<!--icons-->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
 	<header>
+		<p><img src="images/pac2.png" width="400px"></p>
+		<p><b> Shir Ben-Dor 204675797 | Liron Ben-Yakov 204385884 </b></p>
+
+		<p><img src="images/pac1.png" width="50px"><img src="images/pac3.png" width="50px"></p>
 		<p></p>
-		<p><img src="images/pac1.png" width="100px"> Shir Ben-Dor 204675797 <img src="images/pac2.png" width="200px">
-			Liron Ben-Yakov 204385884 <img src="images/pac3.png" width="80px"></p>
 	</header>
-	<br>
 	<div id="menu">
-		<li><a onclick="welcome()">Welcome</a></li>
-		<li><a onclick="register()">Register</a></li>
-		<li><a onclick="login()">Login</a></li>
-		<!--<li><button type="button" id="welcome" onclick="welcome()">Welcome</button></li></li>
-		<li><button type="button" id="register" onclick="register()">Register</button></li>
-		<li><button type="button" id="login" onclick="login()">Login</button></li>-->
-		<li><button type="button" data-toggle="modal" data-target="#aboutDiv">About</button></li>
+		<li><a onclick="welcome()">WELCOME</a></li>
+		<li><a onclick="register()">REGISTER</a></li>
+		<li><a onclick="login()">LOGIN</a></li>
+		<li><a type="button" data-toggle="modal" data-target="#aboutDiv">ABOUT</a></li>
 	</div>
 	<br>
+	<br>
+	<br>
+<!--	<button onclick="game()" type="submit">play game</button>-->
+
 	<div id="content">
 
 		<div id="welcomeDiv">
-			<button id="loginButton" onclick="login()">Login</button>
-			<button id="registerButton" onclick="register()">Register</button>
+			<button1 id="loginButton" onclick="login()">Login</button1>
+			<button1 id="registerButton" onclick="register()">Register</button1>
 		</div>
 
 		<div id="registerDiv">
 			<form class="cmxform" id="signupForm" method="get" action="">
 				<fieldset>
-					<legend>Registration</legend>
+					<legend><b>REGISTRATION:</b></legend>
 					<p>
 						<label for="firstname">Firstname</label>
 						<input id="firstname" name="firstname" type="text">
@@ -68,10 +71,12 @@
 						<label for="email">Email</label>
 						<input id="email" name="email" type="email">
 					</p>
+					<p>
 					<label for="birth">BirthDay</label>
 					<input type="date" name="birth" id="birth" placeholder="Enter your date of birth">
+				</p>
 					<p>
-						<input class="submit" type="submit" value="Submit">
+						<button class="submit" type="submit" value="Submit">SUBMIT</button>
 					</p>
 				</fieldset>
 			</form>
@@ -79,9 +84,14 @@
 
 		<div id="loginDiv">
 			<div id="card" class="card card-container login">
+				<legend><b>LOGIN:</b></legend>
+
+				<p>
 				<input type="text" id="checkUsername" class="form" placeholder="Username" required autofocus>
-				<br>
+			</p>
+			<p>
 				<input type="password" id="checkPassword" class="form" placeholder="Password" required>
+				</p>
 			</div>
 			<button onclick="loginButton()" type="submit">Login</button>
 		</div>
@@ -108,15 +118,15 @@
 	</div>
 
 	<div id="settingDiv">
-		<h1>Setting for game:</h1>
+		<h1><b>SETTING</b></h1>
 		<form action="/action_page.php"></form>
-		<input type="text" size="50" id="up" placeholder="Select up key" onkeypress="setKeyKeyboard(event)"> <br>
-		<input type="text" size="50" id="down" placeholder="Select down key" onkeypress="setKeyKeyboard(event)"> <br>
-		<input type="text" size="50" id="right" placeholder="Select right key" onkeypress="setKeyKeyboard(event)"> <br>
-		<input type="text" size="50" id="left" placeholder="Select left key" onkeypress="setKeyKeyboard(event)"> <br>
-		<label>Choose a number of balls:
+		<input type="text" size="20" id="up" placeholder="Select up key" onkeypress="setKeyKeyboard(event)"> <br>
+		<input type="text" size="20" id="down" placeholder="Select down key" onkeypress="setKeyKeyboard(event)"> <br>
+		<input type="text" size="20" id="right" placeholder="Select right key" onkeypress="setKeyKeyboard(event)"> <br>
+		<input type="text" size="20" id="left" placeholder="Select left key" onkeypress="setKeyKeyboard(event)"> <br>
+		<label>Number of balls:
 			<div class="slidecontainer">
-				<input type="range" id="numberOfBalls" min="50" max="90" value="70" class="slider"
+				<input type="range"  id="numberOfBalls" min="50" max="90" value="50" class="slider" 
 					oninput="myFunction(this.value)"></div><span id="BallsNumber"></span></label><br>
 		<label>Ball of 5 point:</label>
 		<input type="color" id="5ball" value="#ff0000"><br>
@@ -124,9 +134,10 @@
 		<input type="color" id="15ball" value="#ff0000"><br>
 		<label>Ball of 25 point:</label>
 		<input type="color" id="25ball" value="#ff0000"><br>
-		<input type="number" id="timeOfGame" min="60" placeholder="Minimum 60 seconds"> <br>
-		<label>Choose the number of monsters</label>
-		<input type="number" id="numberOfMonsters" min="1" max="4" placeholder="num"><br>
+		<label>Game time:</label>
+		<input type="number" id="timeOfGame" min="60" value="60" placeholder="Minimum 60 seconds"> <br>
+		<label>Number of monsters:</label>
+		<input type="number" id="numberOfMonsters" min="1" max="4" value="1" placeholder="1"><br>
 		<button onclick="randomSettings()" type="submit">Random</button>
 		<button onclick="game()" type="submit">play game</button>
 	</form>
@@ -134,7 +145,6 @@
 	</div>
 
 	<div id="canvesDiv">
-		<p id="welcome_user" class="welcome_user"></p>
 		<div id="setting_board" class="setting_board">
 			<div id="score">
 				<label for="lblScore">SCORE:</label>
@@ -145,12 +155,16 @@
 				<input id="lblTime" type="text" />
 			</div>
 		</div>
-		<div id="game">
-			<canvas id="canvas" height="600" width="600"></canvas>
+		<div id="game" >
+			<p id="welcome_user" class="welcome_user"></p>
+			<canvas id="canvas" height="600" width="600" style="border:2px solid white;
+			border-radius:10px; box-shadow:0 0 3px #AAA;"></canvas>
 		</div>
 	</div>
-	</div>
-	<br>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
 
 	<footer>
 		<span class="foot"><b><u>Contact us:</u></b>

@@ -7,6 +7,8 @@ var start_time;
 var time_elapsed;
 var interval;
 var mouth_pacman;
+var monsters = [{ x: 0, y: 0, img: "./images/pink.ico", xPrev: 0, yPrev: 0 }, { x: 9, y: 9, img: "./images/red.png", xPrev: 9, yPrev: 9 }, { x: 0, y: 9, img: "./images/blue.ico", xPrev: 0, yPrev: 9 }, { x: 9, y: 0, img: "./images/green.jpg", xPrev: 9, yPrev: 0 }];
+
 
 $(document).ready(function() {
 	
@@ -18,9 +20,9 @@ function Start() {
 	board = new Array();
 	score = 0;
 	pac_color = "red";
-	var cnt = 100;
+	var cnt = 100; //%
 	var food_remain = 50;
-	var pacman_remain = 1;
+	var pacman_remain = 1;//init pacman
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
@@ -47,7 +49,7 @@ function Start() {
 				} else {
 					board[i][j] = 0;
 				}
-				cnt--;
+				cnt--;// no criti
 			}
 		}
 	}
@@ -109,16 +111,62 @@ function Draw() {
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
 			if (board[i][j] == 2) {//pacman
-				//DrawPacman();
-				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-				context.lineTo(center.x, center.y);
-				context.fillStyle = pac_color; //color
-				context.fill();
-				context.beginPath();
-				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
-				context.fill();
+				if (mouth_pacman == 2) { //down
+					context.beginPath();
+					context.arc(center.x, center.y, 30, 0.65 * Math.PI, 0.35 * Math.PI); // half circle
+					context.lineTo(center.x, center.y);
+					context.fillStyle = pac_color; //color 
+					context.fill();
+					context.beginPath();
+					context.arc(center.x + 15, center.y + 12, 5, 0, 2 * Math.PI); // circle
+					context.fillStyle = "black"; //color 
+					context.fill();
+				}
+				else if (mouth_pacman == 3) { //left
+					context.beginPath();
+					context.arc(center.x, center.y, 30, 1.15 * Math.PI, 0.85 * Math.PI); // half circle
+					context.lineTo(center.x, center.y);
+					context.fillStyle = pac_color; //color 
+					context.fill();
+					context.beginPath();
+					context.arc(center.x - 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+					context.fillStyle = "black"; //color 
+					context.fill();
+				}
+				else if (mouth_pacman == 1) {//up
+					context.beginPath();
+					context.arc(center.x, center.y, 30, 1.65 * Math.PI, 1.35 * Math.PI); // half circle
+					context.lineTo(center.x, center.y);
+					context.fillStyle = pac_color; //color 
+					context.fill();
+					context.beginPath();
+					context.arc(center.x +15, center.y - 5, 5, 0, 2 * Math.PI); // circle
+					context.fillStyle = "black"; //color 
+					context.fill();
+				}
+				else if (mouth_pacman == 4) {//right
+					context.beginPath();
+					context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+					context.lineTo(center.x,center.y);
+					context.fillStyle = pac_color; //color
+					context.fill();
+					context.beginPath();
+					context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+					context.fillStyle = "black"; //color
+					context.fill();
+				}
+				else {
+				   
+					context.beginPath();
+					context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+					context.lineTo(center.x, center.y);
+					context.fillStyle = pac_color; //color
+					context.fill();
+					context.beginPath();
+					context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+					context.fillStyle = "black"; //color
+					context.fill();
+				}
 			} else if (board[i][j] == 1) {//food
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
@@ -131,6 +179,23 @@ function Draw() {
 				context.fill();
 			}
 		}
+	}
+	//move the monsters
+/*	for (var i = 0; i < 4; i++) {
+        var j = Math.floor((Math.random() * 9) + 1);
+		monsters[i].xPrev = monsters[i].x;
+		monsters[i].yPrev = monsters[i].y;
+	}*/
+	//draw monsters
+	for (var i = 0; i < 4; i++) {
+        var mon = monsters[i];
+        var pic = new Image();
+        pic.width = "20px";
+        pic.height = "20px";
+        pic.src = mon.img;
+        context.drawImage(pic, mon.x * 60, mon.y * 60, 60, 60);
+        if (mon.x == shape.i && mon.y == shape.j) 
+         //   pacMeetMonst();
 	}
 }
 
@@ -179,69 +244,6 @@ function UpdatePosition() {
 		Draw();
 	}
 
-	/*function DrawPacman() {
-		var center = new Object();
-		   x = i * 60 + 30;
-		y = j * 60 + 30;
-		if (mouth_pacman == 2) { //down
-			context.beginPath();
-			context.arc(x, y, 30, 0.65 * Math.PI, 0.35 * Math.PI); // half circle
-			context.lineTo(x, y);
-			context.fillStyle = pac_color; //color 
-			context.fill();
-			context.beginPath();
-			context.arc(x + 5, y + 12, 1.5, 0, 2 * Math.PI); // circle
-			context.fillStyle = "black"; //color 
-			context.fill();
-		}
-		else if (mouth_pacman == 3) { //left
-			context.beginPath();
-			context.arc(x, y, 30, 1.15 * Math.PI, 0.85 * Math.PI); // half circle
-			context.lineTo(x, y);
-			context.fillStyle = pac_color; //color 
-			context.fill();
-			context.beginPath();
-			context.arc(x - 5, y - 15, 1.5, 0, 2 * Math.PI); // circle
-			context.fillStyle = "black"; //color 
-			context.fill();
-		}
-		else if (mouth_pacman == 1) {//up
-			context.beginPath();
-			context.arc(x, y, 30, 1.65 * Math.PI, 1.35 * Math.PI); // half circle
-			context.lineTo(x, y);
-			context.fillStyle = pac_color; //color 
-			context.fill();
-			context.beginPath();
-			context.arc(x +7, y - 12, 1.5, 0, 2 * Math.PI); // circle
-			context.fillStyle = "black"; //color 
-			context.fill();
-		}
-		else if (mouth_pacman == 4) {//right
-			context.beginPath();
-			context.arc(x, y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-			context.lineTo(x, y);
-			context.fillStyle = pac_color; //color
-			context.fill();
-			context.beginPath();
-			context.arc(x + 5, y - 15, 5, 0, 2 * Math.PI); // circle
-			context.fillStyle = "black"; //color
-			context.fill();
-		}
-		else {
-		   
-			context.beginPath();
-			context.arc(x, y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-			context.lineTo(x, y);
-			context.fillStyle = pac_color; //color
-			context.fill();
-			context.beginPath();
-			context.arc(x + 5, y - 15, 5, 0, 2 * Math.PI); // circle
-			context.fillStyle = "black"; //color
-			context.fill();
-		}
-	
-	
-	}*/
 	
 	
 	}

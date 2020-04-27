@@ -12,11 +12,7 @@ users.push(defaultUser);
 
 /*start page with welcome*/
 $(document).ready(function () {
-  $("#welcomeDiv").show();
-  $("#loginDiv").hide();
-  $("#registerDiv").hide();
-  $("#settingDiv").hide();
-  $("#canvesDiv").hide();
+  welcome();
 });
 
 function welcome() {
@@ -213,4 +209,16 @@ jQuery.validator.addMethod("checkPassword", function (value, element) {
   jQuery.validator.addMethod("checkDate", function (value, element) {
     return Date.now() - new Date(value).getTime() > 0;
   });
+
+  /*game settings*/ 
+  function setKeyKeyboard(event) {
+    var key = event.which || event.keyCode; 
+    document.getElementById("up").innerHTML = key;
+    document.getElementById("down").innerHTML = key;
+    
+  }
+
+  function myFunction(val) {
+    document.getElementById("BallsNumber").innerHTML = val; 
+  }
 

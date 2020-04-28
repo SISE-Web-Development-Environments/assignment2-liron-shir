@@ -13,14 +13,17 @@ var numOfBall;
 var gameKeys = [];
 var colorBalls = ["#F996B8", "#CE96F9", "#87F7F5"];
 var timeOfGame;
+var limitTime;
 var numOfMonsters;
 var ball5;
 var ball15;
 var ball25;
+var loseGame = false;
+var BallsAte = 0;
 
 $(document).ready(function () {
 	context = canvas.getContext("2d");
-	Start(variables);
+	Start();
 });
 
 function game() {
@@ -32,28 +35,17 @@ function game() {
 	$("#welcome_user").text("Welcome" + "\u00A0" + user.username + "!");
   }
 
-function Start(variables) {
+function Start() {
 	game();
 	board = new Array();
 	score = 0;
 	pac_color = "red";
 	//var cnt = 100; //%
-	/* update variables game */
-	gameKeys[0]=variables[0];
-	gameKeys[1]=variables[1];
-	gameKeys[2]=variables[2];
-	gameKeys[3]=variables[3];
-	colorBalls[0]=variables[4];
-	colorBalls[1]=variables[5];
-	colorBalls[2]=variables[6];
-	//numOfBall = 50;
-	//food_remain = numOfBall;
-	food_remain = variables[7];
+	food_remain = numOfBall;
 	ball5 = 0.6*food_remain;
 	ball15 = 0.3*food_remain;
 	ball25 = 0.1*food_remain;
-	timeOfGame = variables[8];
-	numOfMonsters= variables[9];
+	limitTime = timeOfGame;
 	var pacman_remain = 1;//init pacman
 	start_time = new Date();
 	board = [
@@ -148,7 +140,7 @@ function Start(variables) {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 250);
+	interval = setInterval(UpdatePosition, 120);
 }
 
 function findRandomEmptyCell(board) {
@@ -179,7 +171,7 @@ function GetKeyPressed() {
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblTime.value = time_elapsed;
+	lblTime.value = timeOfGame;
 	for (var i = 0; i < 20; i++) {
 		for (var j = 0; j < 20; j++) {
 			var center = new Object();
@@ -275,7 +267,7 @@ function Draw() {
 			monsters[i].yPrev = monsters[i].y;
 		}*/
 	//draw monsters
-	for (var i = 0; i < 4; i++) {
+	for (var i = 0; i < numOfMonsters; i++) {
 		var mon = monsters[i];
 		var pic = new Image();
 		pic.width = "30px";
@@ -286,6 +278,7 @@ function Draw() {
 }
 
 function UpdatePosition() {
+	$("#lblScore").text(score);
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
 	if (x == 1) {
@@ -312,20 +305,58 @@ function UpdatePosition() {
 			mouth_pacman = 4;
 		}
 	}
-	if (board[shape.i][shape.j] == 1) {//food
-		score++;
+	if (board[shape.i][shape.j] == 5) {//food- ball 5 points
+		score=score+5;
+		BallsAte++;
+	}
+	else if(board[shape.i][shape.j] == 15){//food- ball 15 points
+		score=score+15;
+		BallsAte++;
+	}
+	else if(board[shape.i][shape.j] == 25){//food- ball 25 points
+		score=score+25;
+		BallsAte++;
 	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if (score >= 20 && time_elapsed <= 10) {
+	//startTimer();
+	/*if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
-	}
-	if (score == numOfBall) {
+	}*/
+	if (BallsAte == numOfBall) {
 		window.clearInterval(interval);
-		window.alert("Game completed");
+		//window.alert("Game completed");
+		gameOver();
 	} else {
 		Draw();
 	}
 }
+/*timer of game*/
+/*
+function startTimer(){
+	timer = setInterval(function(){
+		var timeTemp=document.getElementById('lblTime');
+		timeTemp.value="00:"+limitTime;
+		limitTime--;
+		if (limitTime == "00" && !lose) {
+			clearInterval(timer);
+			timeOut();
+		}
+	}, 800);
+  }
+  function gameOver(){
+	var score=document.getElementById("lblScore");
+	if(loseGame){
+		alert("Loser!");
+	}
+	else if(score.value<100){
+	  alert("You are better than "+score.value,"points!");
+	}
+	else{
+	  alert("Winner!!!");
+	}
+	clearInterval(timer);
+  }
+*/
 

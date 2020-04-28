@@ -32,9 +32,7 @@
 		<li><a type="button" data-toggle="modal" data-target="#aboutDiv">ABOUT</a></li>
 	</div>
 	<br>
-	<br>
-	<br>
-<!--	<button onclick="game()" type="submit">play game</button>-->
+	<!--	<button onclick="game()" type="submit">play game</button>-->
 
 	<div id="content">
 
@@ -72,9 +70,9 @@
 						<input id="email" name="email" type="email">
 					</p>
 					<p>
-					<label for="birth">BirthDay</label>
-					<input type="date" name="birth" id="birth" placeholder="Enter your date of birth">
-				</p>
+						<label for="birth">BirthDay</label>
+						<input type="date" name="birth" id="birth" placeholder="Enter your date of birth">
+					</p>
 					<p>
 						<button class="submit" type="submit" value="Submit">SUBMIT</button>
 					</p>
@@ -87,10 +85,10 @@
 				<legend><b>LOGIN:</b></legend>
 
 				<p>
-				<input type="text" id="checkUsername" class="form" placeholder="Username" required autofocus>
-			</p>
-			<p>
-				<input type="password" id="checkPassword" class="form" placeholder="Password" required>
+					<input type="text" id="checkUsername" class="form" placeholder="Username" required autofocus>
+				</p>
+				<p>
+					<input type="password" id="checkPassword" class="form" placeholder="Password" required>
 				</p>
 			</div>
 			<button onclick="loginButton()" type="submit">Login</button>
@@ -118,29 +116,35 @@
 	</div>
 
 	<div id="settingDiv">
-		<h1><b>SETTING</b></h1>
-		<form action="/action_page.php"></form>
-		<input type="text" size="20" id="up" placeholder="Select up key" onkeypress="setKeyKeyboard(event)"> <br>
-		<input type="text" size="20" id="down" placeholder="Select down key" onkeypress="setKeyKeyboard(event)"> <br>
-		<input type="text" size="20" id="right" placeholder="Select right key" onkeypress="setKeyKeyboard(event)"> <br>
-		<input type="text" size="20" id="left" placeholder="Select left key" onkeypress="setKeyKeyboard(event)"> <br>
-		<label>Number of balls:
-			<div class="slidecontainer">
-				<input type="range"  id="numberOfBalls" min="50" max="90" value="50" class="slider" 
-					oninput="myFunction(this.value)"></div><span id="BallsNumber"></span></label><br>
-		<label>Ball of 5 point:</label>
-		<input type="color" id="5ball" value="#ff0000"><br>
-		<label>Ball of 15 point:</label>
-		<input type="color" id="15ball" value="#ff0000"><br>
-		<label>Ball of 25 point:</label>
-		<input type="color" id="25ball" value="#ff0000"><br>
-		<label>Game time:</label>
-		<input type="number" id="timeOfGame" min="60" value="60" placeholder="Minimum 60 seconds"> <br>
-		<label>Number of monsters:</label>
-		<input type="number" id="numberOfMonsters" min="1" max="4" value="1" placeholder="1"><br>
-		<button onclick="randomSettings()" type="submit">Random</button>
-		<button onclick="game()" type="submit">play game</button>
-	</form>
+		<form class="cmxform" id="setting">
+			<fieldset>
+				<legend><b>SETTING:</b></legend>
+				<label for="upKey">Up key:</label>
+				<input type="text" size="20" id="up" name="up" placeholder="Select up key"><br>
+				<label for="downKey">Down key:</label>
+				<input type="text" size="20" id="down" name="down" placeholder="Select down key"><br>
+				<label for="rightKey">Right key:</label>
+				<input type="text" size="20" id="right" name="right" placeholder="Select right key"><br>
+				<label for="leftKey">Left key:</label>
+				<input type="text" size="20" id="left" name="left" placeholder="Select left key"><br>
+				<label>Number of balls:
+					<div class="slidecontainer">
+						<input type="range" id="numberOfBalls" min="50" max="90" value="50" class="slider"
+							oninput="myFunction(this.value)"></div><span id="BallsNumber"></span></label><br>
+				<label>Ball of 5 point:</label>
+				<input type="color" id="fiveBall" name="fiveBall" value="#F996B8"><br>
+				<label>Ball of 15 point:</label>
+				<input type="color" id="fifteenBall" name="fifteenBall" value="#CE96F9"><br>
+				<label>Ball of 25 point:</label>
+				<input type="color" id="twentyFiveBall" name="twentyFiveBall" value="#87F7F5"><br>
+				<label>Game time:</label>
+				<input type="number" id="timeOfGame" min="60" value="60" placeholder="Minimum 60 seconds"> <br>
+				<label>Number of monsters:</label>
+				<input type="number" id="numberOfMonsters" min="1" max="4" value="1" placeholder="1"><br>
+				<button onclick="randomSettings()" type="submit">Random</button>
+				<button class="submit" type="submit" value="Submit">play game</button>
+			</fieldset>
+		</form>
 
 	</div>
 
@@ -155,16 +159,16 @@
 				<input id="lblTime" type="text" />
 			</div>
 		</div>
-		<div id="game" >
+		<div id="game">
 			<p id="welcome_user" class="welcome_user"></p>
 			<canvas id="canvas" height="600" width="600" style="border:2px solid white;
 			border-radius:10px; box-shadow:0 0 3px #AAA;"></canvas>
 		</div>
 	</div>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
+	<br />
+	<br />
+	<br />
+	<br />
 
 	<footer>
 		<span class="foot"><b><u>Contact us:</u></b>

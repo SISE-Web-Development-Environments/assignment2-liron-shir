@@ -21,7 +21,7 @@ function welcome() {
   $("#registerDiv").hide();
   $("#settingDiv").hide();
   $("#canvesDiv").hide();
-  
+
 }
 
 function login() {
@@ -47,14 +47,6 @@ function setting() {
   $("#settingDiv").show();
   $("#canvesDiv").hide();
 }
-function game() {
-  $("#welcomeDiv").hide();
-  $("#loginDiv").hide();
-  $("#registerDiv").hide();
-  $("#settingDiv").hide();
-  $("#canvesDiv").show();
-  $("#welcome_user").text("Welcome" +"\u00A0" + user.username + "!");
-}
 
 /*login form*/
 function loginButton(element) {
@@ -69,22 +61,22 @@ function loginButton(element) {
         setting();
         return;
       }
-      else{
+      else {
         alert("Wrong password. \nPlease try again");
         clearFiledsLogin()
         return login();
+      }
     }
   }
-  }
-    alert("User does not exist in the system");
-    clearFiledsLogin()
-  }
+  alert("User does not exist in the system");
+  clearFiledsLogin()
+}
 /*Clear fields in login form*/
-  function clearFiledsLogin(){
-    $("#checkUsername").val("");
-    $("#checkPassword").val("");
+function clearFiledsLogin() {
+  $("#checkUsername").val("");
+  $("#checkPassword").val("");
 
-  }
+}
 
 /*exit from Model Dialog with esc*/
 $(document).keydown(function (e) {
@@ -182,15 +174,6 @@ $().ready(function () {
       login();
     }
   });
-  // propose username by combining first- and lastname
-  /*
-  $("#username").focus(function() {
-    var firstname = $("#firstname").val();
-    var lastname = $("#lastname").val();
-    if (firstname && lastname && !this.value) {
-      this.value = firstname + "." + lastname;
-    }
-  });*/
 });
 
 /*functions for validation data in registrtion*/
@@ -208,16 +191,3 @@ jQuery.validator.addMethod("checkPassword", function (value, element) {
   jQuery.validator.addMethod("checkDate", function (value, element) {
     return Date.now() - new Date(value).getTime() > 0;
   });
-
-  /*game settings*/ 
-  function setKeyKeyboard(event) {
-    var key = event.which || event.keyCode; 
-    document.getElementById("up").innerHTML = key;
-    document.getElementById("down").innerHTML = key;
-    
-  }
-
-  function myFunction(val) {
-    document.getElementById("BallsNumber").innerHTML = val; 
-  }
-

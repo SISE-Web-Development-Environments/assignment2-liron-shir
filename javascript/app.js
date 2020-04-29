@@ -33,6 +33,7 @@ function game() {
 	$("#settingDiv").hide();
 	$("#canvesDiv").show();
 	$("#welcome_user").text("Welcome" + "\u00A0" + user.username + "!");
+	showSettings();
   }
 
 function Start() {
@@ -140,7 +141,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 120);
+	interval = setInterval(UpdatePosition, 150);
 }
 
 function findRandomEmptyCell(board) {
@@ -171,7 +172,7 @@ function GetKeyPressed() {
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblTime.value = timeOfGame;
+	lblTime.value = limitTime;
 	for (var i = 0; i < 20; i++) {
 		for (var j = 0; j < 20; j++) {
 			var center = new Object();
@@ -331,6 +332,18 @@ function UpdatePosition() {
 	} else {
 		Draw();
 	}
+}
+
+function showSettings(){
+	lblUp.value = gameKeys[0];
+	lblDown.value = gameKeys[1];
+	lblRight.value = gameKeys[2];
+	lblLeft.value = gameKeys[3];
+	lblBalls.value = numOfBall;
+	lblBall5.value = colorBalls[0];
+	lblBall15.value = colorBalls[1];
+	lblBall25.value = colorBalls[2];
+	lblMonsters.value = numOfMonsters;
 }
 /*timer of game*/
 /*

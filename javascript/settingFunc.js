@@ -79,6 +79,7 @@ $().ready(function () {
 });
 
 jQuery.validator.addMethod("checkColor", function (value, element) {
+
     return !(colorBalls[0] == colorBalls[1] && colorBalls[0] == colorBalls[2] && colorBalls[1] == colorBalls[2]);
 });
 
@@ -104,10 +105,14 @@ window.addEventListener("keydown", function (event) {
 });
 /*random settings by buttom*/
 function randomSettings(){
-    gameKeys[0] = 'ArrowUp';
-    gameKeys[1] = 'ArrowDown';
-    gameKeys[2] = 'ArrowRight';
-    gameKeys[3] = 'ArrowLeft';
+    $("#up")[0].value="ArrowUp";
+    $("#down")[0].value="ArrowDown";
+    $("#right")[0].value= "ArrowRight";
+    $("#left")[0].value= "ArrowLeft";
+    gameKeys[0] = $("#up")[0].value;
+    gameKeys[1] = $("#down")[0].value;
+    gameKeys[2] = $("#right")[0].value;
+    gameKeys[3] = $("#left")[0].value;
     $("#fiveBall")[0].value=getRandomColor();
     $("#fifteenBall")[0].value=getRandomColor();
     $("#twentyFiveBall")[0].value=getRandomColor();

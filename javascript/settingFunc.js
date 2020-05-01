@@ -82,7 +82,7 @@ jQuery.validator.addMethod("checkColor", function (value, element) {
 
     return !(colorBalls[0] == colorBalls[1] && colorBalls[0] == colorBalls[2] && colorBalls[1] == colorBalls[2]);
 });
-
+/*
 window.addEventListener("keydown", function (event) {
     var key = event.which || event.keyCode || event.keydown;
     if (event.target.id === "up") {
@@ -102,7 +102,7 @@ window.addEventListener("keydown", function (event) {
         gameKeys[3] = key;
     }
     return true;
-});
+});*/
 /*random settings by buttom*/
 function randomSettings(){
     $("#up")[0].value="ArrowUp";

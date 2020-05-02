@@ -3,7 +3,7 @@ var shape = new Object();
 var score;
 var pac_color;
 var start_time;
-//var time_elapsed;
+var time_elapsed;
 var interval;
 var intervalTime;
 var mouth_pacman;
@@ -48,7 +48,8 @@ function Start() {
 	pac_color = "red";
 	//var cnt = 100; //%
 	//var pacman_remain = 1;//init pacman
-	start_time = new Date();
+	//start_time = new Date();
+	//start_time.setSeconds(timeOfGame)
 	food_remain = numOfBall;
 	ball5 = 0.6*food_remain;
 	ball15 = 0.3*food_remain;
@@ -58,7 +59,7 @@ function Start() {
 		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
 		[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4],
 		[4, 0, 4, 4, 4, 0, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 0, 0, 4],
-		[4, 0, 4, 0, 4, 0, 4, 0, 0, 4, 0, 4, 0, 4, 0, 0, 4, 0, 0, 4],
+		[4, 0, 4, 0, 0, 0, 4, 0, 0, 4, 0, 4, 0, 4, 0, 0, 4, 0, 0, 4],
 		[4, 0, 4, 0, 4, 0, 4, 0, 4, 4, 0, 4, 0, 4, 4, 0, 4, 0, 0, 4],
 		[4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 4, 4, 0, 4, 0, 4, 4],
 		[4, 0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4],
@@ -116,18 +117,16 @@ function Start() {
 		if(ball5 >0){
 			board[emptyCell[0]][emptyCell[1]] = 5; //food
 			ball5--;
-			food_remain--;
 		}
-		if(ball15 >0){
+		else if(ball15 >0){
 			board[emptyCell[0]][emptyCell[1]] = 15; //food
 			ball15--;
-			food_remain--;
 		}
-		if(ball25 >0){
+		else if(ball25 >0){
 			board[emptyCell[0]][emptyCell[1]] = 25; //food
 			ball25--;
-			food_remain--;
 		}
+		food_remain--;
 
 	}
 
@@ -147,9 +146,8 @@ function Start() {
 		false
 	);
 	interval = setInterval(UpdatePosition, 100);
-	//setTimeout(startTimer(), 1000);
-	//startTimer();
-	intervalTime = setInterval(startTimer, 1000);
+	//intervalTime =  setTimeout(startTimer, 1000);
+	intervalTime = setInterval(startTimer, 3*1000);
 }
 
 function findRandomEmptyCell(board) {
@@ -181,6 +179,7 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = limitTime;
+	//lblTime.value = time_elapsed;
 	lblLives.value = lives;
 	showSettings();
 	for (var i = 0; i < 20; i++) {
@@ -329,11 +328,14 @@ function UpdatePosition() {
 		BallsAte++;
 	}
 	board[shape.i][shape.j] = 2;
-	/*var currentTime = new Date();
-	time_elapsed = (currentTime - start_time) / 1000;
+	var currentTime = new Date();
+	time_elapsed = (start_time - currentTime.getSeconds) / 1000;
+	if(time_elapsed<=0)
+		gameOver();
+
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
-	}*/
+	}
 	if (BallsAte == numOfBall) {
 		window.clearInterval(interval);
 		//window.alert("Game completed");
@@ -357,13 +359,13 @@ function showSettings(){
 /*timer of game*/
 
 function startTimer(){
-	//var timer = setInterval(function(){
+	//setInterval(function(){
 		limitTime--;
 		lblTime.value = limitTime;
 		if (limitTime ==0) {
 			gameOver();
 		}
-	//}, 1000);
+	//}, 4*1000);
   }
   function gameOver(){
 	var score=document.getElementById("lblScore");
@@ -376,6 +378,6 @@ function startTimer(){
 	else{
 	  alert("Winner!!!");
 	}
-	//clearInterval(timer);
+	clearInterval(intervalTime);
   }
 

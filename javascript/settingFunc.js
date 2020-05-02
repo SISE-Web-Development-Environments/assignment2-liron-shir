@@ -30,13 +30,13 @@ $().ready(function () {
                 required: true
             },
             fiveBall: {
-                checkColor: true
+                checkColor1: true
             },
             fifteenBall: {
-                checkColor: true
+                checkColor2: true
             },
             twentyFiveBall: {
-                checkColor: true
+                checkColor3: true
             },
         },
         messages: {
@@ -53,13 +53,13 @@ $().ready(function () {
                 required: "Please enter left move key"
             },
             fiveBall: {
-                checkColor: "Each ball should have a different color"
+                checkColor1: "Each ball should have a different color"
             },
             fifteenBall: {
-                checkColor: "Each ball should have a different color"
+                checkColor2: "Each ball should have a different color"
             },
             twentyFiveBall: {
-                checkColor: "Each ball should have a different color"
+                checkColor3: "Each ball should have a different color"
             }
         },
         submitHandler: function (form, event) {
@@ -78,31 +78,25 @@ $().ready(function () {
     });
 });
 
-jQuery.validator.addMethod("checkColor", function (value, element) {
-
-    return !(colorBalls[0] == colorBalls[1] && colorBalls[0] == colorBalls[2] && colorBalls[1] == colorBalls[2]);
+jQuery.validator.addMethod("checkColor1", function (value, element) {
+    color1 = $("#fiveBall").val();
+    color2 = $("#fifteenBall").val();
+    color3 = $("#twentyFiveBall").val();
+    return !(color1 == color2 || color1 == color3);
 });
-/*
-window.addEventListener("keydown", function (event) {
-    var key = event.which || event.keyCode || event.keydown;
-    if (event.target.id === "up") {
-        document.getElementById("up").innerHTML = key;
-        gameKeys[0] = key;
-    }
-    if (event.target.id === "down") {
-        document.getElementById("down").innerHTML = key;
-        gameKeys[1] = key;
-    }
-    if (event.target.id === "right") {
-        document.getElementById("right").innerHTML = key;
-        gameKeys[2] = key;
-    }
-    if (event.target.id === "left") {
-        document.getElementById("left").innerHTML = key;
-        gameKeys[3] = key;
-    }
-    return true;
-});*/
+jQuery.validator.addMethod("checkColor2", function (value, element) {
+    color1 = $("#fiveBall").val();
+    color2 = $("#fifteenBall").val();
+    color3 = $("#twentyFiveBall").val();
+    return !(color1 == color2 || color2 == color3);
+});
+jQuery.validator.addMethod("checkColor3", function (value, element) {
+    color1 = $("#fiveBall").val();
+    color2 = $("#fifteenBall").val();
+    color3 = $("#twentyFiveBall").val();
+    return !(color1 == color3 || color2 == color3);
+});
+
 /*random settings by buttom*/
 function randomSettings(){
     $("#up")[0].value="ArrowUp";

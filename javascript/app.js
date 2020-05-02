@@ -263,10 +263,13 @@ function Draw() {
 				context.fill();
 			}
 			else if (board[i][j] == 4) {//walls
-				context.beginPath();
+				var wall=new Image();
+				wall.src= "./images/wall3.jpg";
+				context.drawImage(wall,center.x - 20, center.y - 20, 30, 30);
+				/*context.beginPath();
 				context.rect(center.x - 20, center.y - 20, 30, 30);
 				context.fillStyle = "grey"; //color
-				context.fill();
+				context.fill();*/
 			}
 		}
 	}
@@ -276,14 +279,21 @@ function Draw() {
 			monsters[i].xPrev = monsters[i].x;
 			monsters[i].yPrev = monsters[i].y;
 		}*/
-	//draw monsters
+	drawMonsters();
+
+}
+
+function drawMonsters(){
 	for (var i = 0; i < numOfMonsters; i++) {
+		var center = new Object();
 		var mon = monsters[i];
+		center.x = mon.x * 30 + 20;
+		center.y = mon.y * 30 + 20;
 		var pic = new Image();
 		pic.width = "30px";
 		pic.height = "30px";
 		pic.src = mon.img;
-		context.drawImage(pic, mon.x * 30, mon.y * 30, 20, 20);
+		context.drawImage(pic, center.x - 20, center.y - 20, 30, 30);
 	}
 }
 

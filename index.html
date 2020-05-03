@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< Updated upstream
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
@@ -9,13 +10,132 @@
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
 			<input id="lblScore" type="text" />
+=======
+
+<head>
+	<!--check the links (model dialog- about)-->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<!--good-->
+	<script src="javascript/jquery-3.4.1.slim.min.js"></script>
+	<script type="text/javascript" src="javascript/app.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+	<!--icons-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+	<header width:25%;>
+		<p><img src="images/pac2.png" width="400px"></p>
+		<p><b> Shir Ben-Dor 204675797 | Liron Ben-Yakov 204385884 </b></p>
+
+	<!---	<p><img src="images/pac1.png" width="50px"><img src="images/pac3.png" width="50px"></p>-->
+		<p></p>
+	</header>
+	<div id="menu">
+		<li><a onclick="welcome()">WELCOME</a></li>
+		<li><a onclick="register()">REGISTER</a></li>
+		<li><a onclick="login()">LOGIN</a></li>
+		<li><a type="button" data-toggle="modal" data-target="#aboutDiv">ABOUT</a></li>
+	</div>
+	<br>
+	<!--	<button onclick="game()" type="submit">play game</button>-->
+
+	<div id="content">
+
+		<div id="welcomeDiv">
+			<button1 id="loginButton" onclick="login()">Login</button1>
+			<button1 id="registerButton" onclick="register()">Register</button1>
+			<br />
+			<br />
+			<br />
+			<br />
+
+		</div>
+
+		<div id="registerDiv">
+			<form class="cmxform" id="signupForm" method="get" action="">
+				<fieldset>
+					<legend><b>REGISTRATION:</b></legend>
+					<p>
+						<label for="firstname">Firstname</label>
+						<input id="firstname" name="firstname" type="text">
+					</p>
+					<p>
+						<label for="lastname">Lastname</label>
+						<input id="lastname" name="lastname" type="text">
+					</p>
+					<p>
+						<label for="username">Username</label>
+						<input id="username" name="username" type="text">
+					</p>
+					<p>
+						<label for="password">Password</label>
+						<input id="password" name="password" type="password">
+					</p>
+					<p>
+						<label for="confirm_password">Confirm password</label>
+						<input id="confirm_password" name="confirm_password" type="password">
+					</p>
+					<p>
+						<label for="email">Email</label>
+						<input id="email" name="email" type="email">
+					</p>
+					<p>
+						<label for="birth">BirthDay</label>
+						<input type="date" name="birth" id="birth" placeholder="Enter your date of birth">
+					</p>
+					<p>
+						<button class="submit" type="submit" value="Submit">SUBMIT</button>
+					</p>
+				</fieldset>
+			</form>
+>>>>>>> Stashed changes
 		</div>
 		<div id="time">
 			<label for="lblTime">TIME:</label>
 			<input id="lblTime" type="text" />
 		</div>
+<<<<<<< Updated upstream
 		<div id="game">
 			<canvas id="canvas" height="600" width="600"></canvas>
 		</div>
 	</body>
 </html>
+=======
+		<div id="game" >
+			<p id="welcome_user" class="welcome_user"></p>
+			<canvas id="canvas" height="500" width="800"  style=" width:50%;border:2px solid white;
+			border-radius:10px; box-shadow:0 0 3px #AAA;"></canvas>
+		</div>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+
+	<footer>
+		<span class="foot"><b><u>Contact us:</u></b>
+			<b>Liron:</b>
+			<a href="mailto:oskar@post.bgu.ac.il"><i class="fa fa-envelope"></i></a>
+			<a href="#" class="fa fa-facebook"></a>
+			<a href="#" class="fa fa-instagram"></a>
+			<b>Shir:</b>
+			<a href="mailto:bendsh@post.bgu.ac.il"><i class="fa fa-envelope"></i></a>
+			<a href="#" class="fa fa-facebook"></a>
+			<a href="#" class="fa fa-instagram"></a>
+		</span>
+	</footer>
+
+	<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script src="javascript/functions.js"></script>
+	<script src="javascript/settingFunc.js"></script>
+</body>
+
+</html>
+>>>>>>> Stashed changes

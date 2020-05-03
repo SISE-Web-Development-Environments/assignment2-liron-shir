@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+	<head>
+		<script src="./jquery-3.4.1.slim.min.js"></script>
+		<script type="text/javascript" src="./app.js"></script>
 	<!--check the links (model dialog- about)-->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,11 +19,10 @@
 </head>
 
 <body>
-	<header>
+	<header width:25%;>
 		<p><img src="images/pac2.png" width="400px"></p>
 		<p><b> Shir Ben-Dor 204675797 | Liron Ben-Yakov 204385884 </b></p>
-
-		<p><img src="images/pac1.png" width="50px"><img src="images/pac3.png" width="50px"></p>
+	<!---	<p><img src="images/pac1.png" width="50px"><img src="images/pac3.png" width="50px"></p>-->
 		<p></p>
 	</header>
 	<div id="menu">
@@ -205,9 +205,10 @@
 				<input id="lblMonsters" type="text" size="10"/>
 			</div>
 		</div>
-		<div id="game">
+
+		<div id="game" >
 			<p id="welcome_user" class="welcome_user"></p>
-			<canvas id="canvas" height="600" width="800" style="border:2px solid white;
+			<canvas id="canvas" height="500" width="800"  style=" width:50%;border:2px solid white;
 			border-radius:10px; box-shadow:0 0 3px #AAA;"></canvas>
 		</div>
 	</div>
@@ -228,10 +229,11 @@
 			<a href="#" class="fa fa-instagram"></a>
 		</span>
 	</footer>
+
 	<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	<script src="javascript/functions.js"></script>
 	<script src="javascript/settingFunc.js"></script>
 </body>
-
 </html>
+

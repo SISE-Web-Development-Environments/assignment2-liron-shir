@@ -185,8 +185,8 @@ function Draw() {
 	for (var i = 0; i < 20; i++) {
 		for (var j = 0; j < 20; j++) {
 			var center = new Object();
-			center.x = i * 30 + 20;
-			center.y = j * 30 + 20;
+			center.x = i * 40 + 20;
+			center.y = j * 40 + 20;
 			if (board[i][j] == 2) {//pacman
 				if (mouth_pacman == 2) { //down
 					context.beginPath();
@@ -265,7 +265,7 @@ function Draw() {
 			else if (board[i][j] == 4) {//walls
 				var wall=new Image();
 				wall.src= "./images/wall3.jpg";
-				context.drawImage(wall,center.x - 20, center.y - 20, 30, 30);
+				context.drawImage(wall,center.x - 20, center.y - 20, 40, 40);
 				/*context.beginPath();
 				context.rect(center.x - 20, center.y - 20, 30, 30);
 				context.fillStyle = "grey"; //color
@@ -287,13 +287,13 @@ function drawMonsters(){
 	for (var i = 0; i < numOfMonsters; i++) {
 		var center = new Object();
 		var mon = monsters[i];
-		center.x = mon.x * 30 + 20;
-		center.y = mon.y * 30 + 20;
+		center.x = mon.x * 40 + 20;
+		center.y = mon.y * 40 + 20;
 		var pic = new Image();
 		pic.width = "30px";
 		pic.height = "30px";
 		pic.src = mon.img;
-		context.drawImage(pic, center.x - 20, center.y - 20, 30, 30);
+		context.drawImage(pic, center.x - 20, center.y - 20, 40, 40);
 	}
 }
 

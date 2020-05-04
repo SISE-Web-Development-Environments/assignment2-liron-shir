@@ -63,10 +63,6 @@ $().ready(function () {
             }
         },
         submitHandler: function (form, event) {
-            gameKeys[0] = $("#up").val();
-            gameKeys[1] = $("#down").val();
-            gameKeys[2] = $("#right").val();
-            gameKeys[3] = $("#left").val();
             colorBalls[0] = $("#fiveBall").val();
             colorBalls[1] = $("#fifteenBall").val();
             colorBalls[2] = $("#twentyFiveBall").val();
@@ -77,6 +73,28 @@ $().ready(function () {
         }
     });
 });
+
+window.addEventListener("keydown", function(event) {
+    var control = false;
+    if(event.target.id === "up"){
+        gameKeys[0] = event.code;
+        control=true;
+      }
+    if(event.target.id === "down"){
+        gameKeys[1] = event.code;  
+        control=true;
+      } 
+    if(event.target.id === "left"){
+        gameKeys[2] = event.code;
+        control=true;
+      }
+      if(event.target.id === "right"){
+        gameKeys[3] = event.code;
+        control=true;
+      }
+    if(control)
+      event.target.value = event.code;
+  }, true);
 
 jQuery.validator.addMethod("checkColor1", function (value, element) {
     color1 = $("#fiveBall").val();
@@ -105,17 +123,20 @@ function randomSettings(){
     $("#left")[0].value= "ArrowLeft";
     gameKeys[0] = $("#up")[0].value;
     gameKeys[1] = $("#down")[0].value;
-    gameKeys[2] = $("#right")[0].value;
-    gameKeys[3] = $("#left")[0].value;
+    gameKeys[2] = $("#left")[0].value;
+    gameKeys[3] = $("#right")[0].value;
     $("#fiveBall")[0].value=getRandomColor();
     $("#fifteenBall")[0].value=getRandomColor();
     $("#twentyFiveBall")[0].value=getRandomColor();
     colorBalls[0] = $("#fiveBall")[0].value;
     colorBalls[1] = $("#fifteenBall")[0].value;
     colorBalls[2] = $("#twentyFiveBall")[0].value;
-    numOfBall = randomNumberOfBalls();
-    timeOfGame = 60 + Math.floor((Math.random() * 100));
-    numOfMonsters = randonNumberOfMonsters();
+    $("#numberOfBalls")[0].value=randomNumberOfBalls();
+    numOfBall = $("#numberOfBalls").val();
+    $("#timeOfGame")[0].value = 60 + Math.floor((Math.random() * 100));
+    timeOfGame = $("#timeOfGame").val();
+    $("#numberOfMonsters")[0].value=  randonNumberOfMonsters();
+    numOfMonsters = $("#numberOfMonsters").val();
     Start();
 }
 

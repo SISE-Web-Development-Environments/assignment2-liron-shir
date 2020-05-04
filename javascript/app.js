@@ -135,14 +135,14 @@ function Start() {
 	addEventListener(
 		"keydown",
 		function (e) {
-			keysDown[e.keyCode] = true;
+			keysDown[e.code] = true;
 		},
 		false
 	);
 	addEventListener(
 		"keyup",
 		function (e) {
-			keysDown[e.keyCode] = false;
+			keysDown[e.code] = false;
 		},
 		false
 	);
@@ -162,16 +162,16 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-	if (keysDown[38]) {
+	if (keysDown[gameKeys[0]]) {
 		return 1;
 	}
-	if (keysDown[40]) {
+	if (keysDown[gameKeys[1]]) {
 		return 2;
 	}
-	if (keysDown[37]) {
+	if (keysDown[gameKeys[2]]) {
 		return 3;
 	}
-	if (keysDown[39]) {
+	if (keysDown[gameKeys[3]]) {
 		return 4;
 	}
 }
@@ -394,12 +394,15 @@ function UpdatePosition() {
 function showSettings(){
 	lblUp.value = gameKeys[0];
 	lblDown.value = gameKeys[1];
-	lblRight.value = gameKeys[2];
-	lblLeft.value = gameKeys[3];
+	lblLeft.value = gameKeys[2];
+	lblRight.value = gameKeys[3];
 	lblBalls.value = numOfBall;
 	lblBall5.value = colorBalls[0];
+	lblBall5.style["background-color"] = colorBalls[0];
 	lblBall15.value = colorBalls[1];
+	lblBall15.style["background-color"] = colorBalls[1];
 	lblBall25.value = colorBalls[2];
+	lblBall25.style["background-color"] = colorBalls[2];
 	lblMonsters.value = numOfMonsters;
 }
 /*timer of game*/

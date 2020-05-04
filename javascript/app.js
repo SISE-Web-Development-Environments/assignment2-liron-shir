@@ -22,6 +22,7 @@ var ball25;
 var loseGame;
 var BallsAte;
 var lives;
+var gameInterval;
 
 
 $(document).ready(function () {
@@ -185,8 +186,8 @@ function Draw() {
 	for (var i = 0; i < 20; i++) {
 		for (var j = 0; j < 20; j++) {
 			var center = new Object();
-			center.x = i * 40 + 20;
-			center.y = j * 40 + 20;
+			center.x = i * 30 + 20;
+			center.y = j * 30 + 20;
 			if (board[i][j] == 2) {//pacman
 				if (mouth_pacman == 2) { //down
 					context.beginPath();
@@ -265,7 +266,7 @@ function Draw() {
 			else if (board[i][j] == 4) {//walls
 				var wall=new Image();
 				wall.src= "./images/wall3.jpg";
-				context.drawImage(wall,center.x - 20, center.y - 20, 40, 40);
+				context.drawImage(wall,center.x - 20, center.y - 20, 30, 30);
 				/*context.beginPath();
 				context.rect(center.x - 20, center.y - 20, 30, 30);
 				context.fillStyle = "grey"; //color
@@ -279,21 +280,56 @@ function Draw() {
 			monsters[i].xPrev = monsters[i].x;
 			monsters[i].yPrev = monsters[i].y;
 		}*/
-	drawMonsters();
+	MovingMonsters()
+	DrawMonsters();
 
 }
+function MovingMonsters(){
+	//gameInterval=setInterval(()=>{
+	for (var i = 0; i < numOfMonsters; i++) {
+		var best=BestMoveForMonster(monsters[i]);
+		monsters[i].xPrev=monsters[i].x;
+		monsters[i].yPrev=monsters[i].y;
+		monsters[i].x=best.x;
+		monsters[i].y=best.y;
+	}
+//},1000)
+}
 
-function drawMonsters(){
+function BestMoveForMonster(monster){
+	var optionalSteps=new Array();
+	var max = Number.MAX_SAFE_INTEGER;
+	var bestMove;
+	var	step;
+	var dis;
+	optionalSteps.push([monster.x-1,monster.y]);
+	optionalSteps.push([monster.x+1,monster.y]);
+	optionalSteps.push([monster.x,monster.y+1]);
+	optionalSteps.push([monster.x,monster.y-1]);
+	for(var i=0;i<optionalSteps.length;i++){
+		step=optionalSteps[i];
+		if(board[step[0]][step[1]]!=4){
+			dis= Math.sqrt(Math.pow(step[0] - shape.i, 2) + Math.pow(step[1] - shape.j, 2));
+			if(dis<max && (monster.xPrev!=step[0] || monster.yPrev!=step[1])){
+				max=dis;
+				bestMove={x: step[0] ,y: step[1]};
+			}
+		}
+	}
+	return bestMove;
+}
+
+function DrawMonsters(){
 	for (var i = 0; i < numOfMonsters; i++) {
 		var center = new Object();
-		var mon = monsters[i];
-		center.x = mon.x * 40 + 20;
-		center.y = mon.y * 40 + 20;
-		var pic = new Image();
-		pic.width = "30px";
-		pic.height = "30px";
-		pic.src = mon.img;
-		context.drawImage(pic, center.x - 20, center.y - 20, 40, 40);
+		var monster = monsters[i];
+		center.x = monster.x * 30 + 20;
+		center.y = monster.y * 30 + 20;
+		var monster_img = new Image();
+		monster_img.width = "30px";
+		monster_img.height = "30px";
+		monster_img.src = monster.img;
+		context.drawImage(monster_img, center.x - 20, center.y - 20, 30, 30);
 	}
 }
 

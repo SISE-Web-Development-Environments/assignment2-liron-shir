@@ -24,7 +24,7 @@ var loseGame;
 var BallsAte;
 var lifes;
 var gameInterval;
-var pizza = { x: 21, y: 1, img: "./images/piz.png", xPrev: 21, yPrev: 1, active: true };
+var pizza = [{ x: 21, y: 1, img: "./images/piz.png", xPrev: 21, yPrev: 1, active: true }];
 
 $(document).ready(function () {
 	context = canvas.getContext("2d");
@@ -76,8 +76,8 @@ function Start() {
 		[4, 0, 4, 4, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
 		[4, 0, 0, 0, 4, 0, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4],
 		[4, 0, 4, 0, 4, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0, 4],
-		[4, 0, 4, 0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
-		[4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4],
+		[4, 0, 4, 0, 4, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 0, 4, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 4, 4, 4],
 		[4, 0, 4, 0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
 		[4, 0, 4, 0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
 		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
@@ -85,6 +85,8 @@ function Start() {
 	];
 
 	initPacmen();
+	initPizza();
+	initMonsters();
 	while (food_remain > 0) {
 		emptyCell = findRandomEmptyCell(board);
 		if (ball5 > 0) {
@@ -130,6 +132,22 @@ function initPacmen() {
 	shape.j = emptyCell[1];
 	board[emptyCell[0]][emptyCell[1]] = 2; //pacmen
 }
+ function initPizza(){
+	 if( numOfMonsters==4){
+		var emptyCell = findRandomEmptyCell(board);
+		pizza[0].x=emptyCell[0];
+		pizza[0].y=emptyCell[1];
+		pizza[0].xPrev=emptyCell[0];
+		pizza[0].yPrev=emptyCell[1];
+	 }
+	 else{
+		 pizza[0].x=21;
+		 pizza[0].y=1;
+		 pizza[0].xPrev=21;
+		 pizza[0].yPrev=1;
+	 }
+
+ }
 
 function findRandomEmptyCell(board) {
 	var i = Math.floor((Math.random() * 22) + 1);
@@ -262,26 +280,54 @@ function Draw() {
 	}
 	//movingMonsters();
 	DrawMonsters();
+	//movingPizza();
 	DrawPizza();
 }
 
 function DrawPizza() {
-	if (pizza.active == true) {
+	if (pizza[0].active == true) {
 		var center = new Object();
-		if (numOfMonsters != 4) {
-			center.x = pizza.x * 35 + 20;
-			center.y = pizza.y * 35 + 20;
-		} else {
-			var emptyCell = findRandomEmptyCell(board);
-			center.x = emptyCell[0] * 35 + 20;
-			center.y = emptyCell[1] * 35 + 20;
-		}
+		center.x = pizza[0].x * 35 + 20;
+		center.y = pizza[0].y * 35 + 20;
 		var pizza_img = new Image();
 		pizza_img.width = "30px";
 		pizza_img.height = "30px";
-		pizza_img.src = pizza.img;
+		pizza_img.src = pizza[0].img;
 		context.drawImage(pizza_img, center.x - 20, center.y - 20, 35, 35);
 	}
+}
+
+function bestMoveForPizza() {
+	var optionalSteps = new Array();
+	var min = Number.MIN_SAFE_INTEGER;
+	var bestMove;
+	var step;
+	var dis;
+	optionalSteps.push([pizza[0].x - 1, pizza[0].y]);
+	optionalSteps.push([pizza[0].x + 1, pizza[0].y]);
+	optionalSteps.push([pizza[0].x, pizza[0].y + 1]);
+	optionalSteps.push([pizza[0].x, pizza[0].y - 1]);
+	for (var i = 0; i < optionalSteps.length; i++) {
+		step = optionalSteps[i];
+		if (board[step[0]][step[1]] != 4) {
+			dis = Math.sqrt(Math.pow(step[0] - shape.i, 2) + Math.pow(step[1] - shape.j, 2));
+			if (dis > min && (pizza[0].xPrev != step[0] || pizza[0].yPrev != step[1])) {
+				min = dis;
+				bestMove = { x: step[0], y: step[1] };
+			}
+		}
+	}
+	return bestMove;
+
+}
+
+function movingPizza(){
+	var best;
+	best = bestMoveForPizza();
+	pizza[0].xPrev=pizza[0].x;
+	pizza[0].yPrev=pizza[0].y;
+	pizza[0].x=best.x;
+	pizza[0].y=best.y;
 }
 
 function bestMoveForMonster(monster) {
@@ -316,6 +362,7 @@ function movingMonsters() {
 		monsters[i].x = best.x;
 		monsters[i].y = best.y;
 	}
+	movingPizza();
 }
 
 function DrawMonsters() {
@@ -438,7 +485,7 @@ function showSettings() {
 	lblBall25.style["background-color"] = colorBalls[2];
 	lblMonsters.value = numOfMonsters;
 }
-/timer of game/
+/*timer of game*/
 
 function startTimer() {
 	limitTime--;
@@ -453,7 +500,7 @@ function gameOver() {
 	window.clearInterval(gameInterval);
 	var message;
 	if (loseGame) {
-		message = "Loser!";
+	//	message = "Loser!";
 	}
 	else if (score.value < 100) {
 		message = "You are better than " + score + "points!";
@@ -461,9 +508,8 @@ function gameOver() {
 	else {
 		message = "Winner!!!";
 	}
-	alert(message);
+	//alert(message);
 }
 function newGame() {
-	initMonsters();
 	Start();
 }

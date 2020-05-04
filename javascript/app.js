@@ -85,14 +85,9 @@ function Start() {
 	];
 
 	initPacmen();
-<<<<<<< HEAD
 	initPizza();
 	initMonsters();
-=======
-	
-	initMonsters();
 	initClockAndDrugs();
->>>>>>> 8d36b333fa05ca159f342fc101f95613a56aee1f
 	while (food_remain > 0) {
 		emptyCell = findRandomEmptyCell(board);
 		if (ball5 > 0) {
@@ -516,10 +511,6 @@ function showSettings() {
 	lblMonsters.value = numOfMonsters;
 }
 /*timer of game*/
-<<<<<<< HEAD
-
-=======
->>>>>>> 8d36b333fa05ca159f342fc101f95613a56aee1f
 function startTimer() {
 	limitTime--;
 	//lblTime.value = limitTime;

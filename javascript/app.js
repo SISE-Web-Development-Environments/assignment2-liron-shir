@@ -21,7 +21,7 @@ var ball15;
 var ball25;
 var loseGame;
 var BallsAte;
-var lives;
+var lifes;
 var gameInterval;
 
 $(document).ready(function () {
@@ -42,7 +42,7 @@ function Start() {
 	game();
 	board = new Array();
 	score = 0;
-	lives = 5;
+	lifes = 5;
 	BallsAte = 0;
 	loseGame = false;
 	pac_color = "red";
@@ -181,7 +181,7 @@ function Draw() {
 	lblScore.value = score;
 	lblTime.value = limitTime;
 	//lblTime.value = time_elapsed;
-	lblLives.value = lives;
+	lblLifes.value = lifes;
 	showSettings();
 	for (var i = 0; i < 20; i++) {
 		for (var j = 0; j < 20; j++) {
@@ -324,6 +324,9 @@ function DrawMonsters() {
 		monster_img.height = "30px";
 		monster_img.src = monster.img;
 		context.drawImage(monster_img, center.x - 20, center.y - 20, 30, 30);
+		if(monster.x == shape.i && monster.y==shape.j){
+			if(lifes)
+		}
 	}
 }
 

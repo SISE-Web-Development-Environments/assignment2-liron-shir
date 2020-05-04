@@ -299,7 +299,6 @@ function Draw() {
 	}
 	//movingMonsters();
 	DrawMonsters();
-	//movingPizza();
 	DrawPizza();
 }
 

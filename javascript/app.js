@@ -24,6 +24,7 @@ var loseGame;
 var BallsAte;
 var lifes;
 var gameInterval;
+var pizza={x:21,y:1,img:"./images/piz.png",xPrev: 21, yPrev: 1, active:true};
 
 $(document).ready(function () {
 	context = canvas.getContext("2d");
@@ -150,6 +151,10 @@ function Start() {
 	//intervalTime =  setTimeout(startTimer, 1000);
 	timeInterval = setInterval(startTimer, 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
+<<<<<<< HEAD
+
+=======
+>>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 }
 
 function initPacmen() {
@@ -290,7 +295,28 @@ function Draw() {
 	}
 	//movingMonsters();
 	DrawMonsters();
+	DrawPizza();
 }
+
+function DrawPizza(){
+	if(pizza.active==true){
+		var center = new Object();
+		if(numOfMonsters!=4){
+		center.x = pizza.x * 35 + 20;
+		center.y = pizza.y * 35 + 20;
+		}else{
+		var emptyCell = findRandomEmptyCell(board);
+		center.x = emptyCell[0] * 35 + 20;
+		center.y = emptyCell[1] * 35 + 20;
+		}
+		var pizza_img = new Image();
+		pizza_img.width = "30px";
+		pizza_img.height = "30px";
+		pizza_img.src = pizza.img;
+		context.drawImage(pizza_img, center.x - 20, center.y - 20, 35, 35);
+	}
+}
+
 function bestMoveForMonster(monster) {
 	var optionalSteps = new Array();
 	var max = Number.MAX_SAFE_INTEGER;
@@ -360,12 +386,16 @@ function monsterHitPacmen() {
 function initGameAfterHit() {
 	board[shape.i][shape.j] = 0;
 	initPacmen();
+<<<<<<< HEAD
+	for(var i=0; i<numOfMonsters; i++){
+=======
 	initMonsters();
 
 }
 
 function initMonsters(){
 	for (var i = 0; i < numOfMonsters; i++) {
+>>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 		monsters[i].x = startMonsters[i].x;
 		monsters[i].xPrev = startMonsters[i].xPrev;
 		monsters[i].y = startMonsters[i].y;
@@ -457,22 +487,32 @@ function startTimer() {
 	//}, 4*1000);
 }
 function gameOver() {
+<<<<<<< HEAD
+	var score = document.getElementById("lblScore");
+=======
 	window.clearInterval(interval);
 	window.clearInterval(timeInterval);
 	window.clearInterval(gameInterval);
 	var message;
+>>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 	if (loseGame) {
-		message = "Loser!";
+	//	alert("Loser!");
 	}
 	else if (score.value < 100) {
-		message = "You are better than " + score + "points!";
+		alert("You are better than " + score.value, "points!");
 	}
 	else {
+<<<<<<< HEAD
+		alert("Winner!!!");
+	}
+	//clearInterval(intervalTime);
+=======
 		message = "Winner!!!";
 	}
 }
 function newGame() {
 	initMonsters();
 	Start();
+>>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 }
 

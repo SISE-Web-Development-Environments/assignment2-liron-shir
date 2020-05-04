@@ -150,6 +150,9 @@ footer
     }
     #canvas{
       background-color: #e0d5eb;
+      border:2px solid white;
+      border-radius:10px; 
+      box-shadow:0 0 3px #AAA;
     }
     /* for canves */
    /*@media screen and (max-height: 768px){

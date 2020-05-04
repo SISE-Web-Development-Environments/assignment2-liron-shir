@@ -2,8 +2,8 @@ var context;
 var shape = new Object();
 var score;
 var pac_color;
-var start_time;
-var time_elapsed;
+//var start_time;
+//var time_elapsed;
 var interval;
 var intervalTime;
 var mouth_pacman;
@@ -24,7 +24,6 @@ var BallsAte;
 var lives;
 var gameInterval;
 
-
 $(document).ready(function () {
 	context = canvas.getContext("2d");
 	Start();
@@ -37,7 +36,7 @@ function game() {
 	$("#settingDiv").hide();
 	$("#canvesDiv").show();
 	$("#welcome_user").text("Welcome" + "\u00A0" + user.username + "!");
-  }
+}
 
 function Start() {
 	game();
@@ -52,10 +51,10 @@ function Start() {
 	//start_time = new Date();
 	//start_time.setSeconds(timeOfGame)
 	food_remain = numOfBall;
-	ball5 = 0.6*food_remain;
-	ball15 = 0.3*food_remain;
-	ball25 = 0.1*food_remain;
 	limitTime = timeOfGame;
+	ball5 = 0.6 * food_remain;
+	ball15 = 0.3 * food_remain;
+	ball25 = 0.1 * food_remain;
 	board = [
 		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
 		[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4],
@@ -115,15 +114,15 @@ function Start() {
 
 	while (food_remain > 0) {
 		emptyCell = findRandomEmptyCell(board);
-		if(ball5 >0){
+		if (ball5 > 0) {
 			board[emptyCell[0]][emptyCell[1]] = 5; //food
 			ball5--;
 		}
-		else if(ball15 >0){
+		else if (ball15 > 0) {
 			board[emptyCell[0]][emptyCell[1]] = 15; //food
 			ball15--;
 		}
-		else if(ball25 >0){
+		else if (ball25 > 0) {
 			board[emptyCell[0]][emptyCell[1]] = 25; //food
 			ball25--;
 		}
@@ -146,9 +145,10 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 100);
+	interval = setInterval(UpdatePosition, 150);
 	//intervalTime =  setTimeout(startTimer, 1000);
-	intervalTime = setInterval(startTimer, 3*1000);
+	intervalTime = setInterval(startTimer, 3*1000);	
+	gameInterval = setInterval(movingMonsters,1000);
 }
 
 function findRandomEmptyCell(board) {
@@ -264,9 +264,9 @@ function Draw() {
 				context.fill();
 			}
 			else if (board[i][j] == 4) {//walls
-				var wall=new Image();
-				wall.src= "./images/wall3.jpg";
-				context.drawImage(wall,center.x - 20, center.y - 20, 30, 30);
+				var wall = new Image();
+				wall.src = "./images/wall3.jpg";
+				context.drawImage(wall, center.x - 20, center.y - 20, 30, 30);
 				/*context.beginPath();
 				context.rect(center.x - 20, center.y - 20, 30, 30);
 				context.fillStyle = "grey"; //color
@@ -274,52 +274,46 @@ function Draw() {
 			}
 		}
 	}
-	//move the monsters
-	/*	for (var i = 0; i < 4; i++) {
-			var j = Math.floor((Math.random() * 9) + 1);
-			monsters[i].xPrev = monsters[i].x;
-			monsters[i].yPrev = monsters[i].y;
-		}*/
-	MovingMonsters()
+	//movingMonsters();
 	DrawMonsters();
-
 }
-function MovingMonsters(){
-	//gameInterval=setInterval(()=>{
-	for (var i = 0; i < numOfMonsters; i++) {
-		var best=BestMoveForMonster(monsters[i]);
-		monsters[i].xPrev=monsters[i].x;
-		monsters[i].yPrev=monsters[i].y;
-		monsters[i].x=best.x;
-		monsters[i].y=best.y;
-	}
-//},1000)
-}
-
-function BestMoveForMonster(monster){
-	var optionalSteps=new Array();
+function bestMoveForMonster(monster) {
+	var optionalSteps = new Array();
 	var max = Number.MAX_SAFE_INTEGER;
 	var bestMove;
-	var	step;
+	var step;
 	var dis;
-	optionalSteps.push([monster.x-1,monster.y]);
-	optionalSteps.push([monster.x+1,monster.y]);
-	optionalSteps.push([monster.x,monster.y+1]);
-	optionalSteps.push([monster.x,monster.y-1]);
-	for(var i=0;i<optionalSteps.length;i++){
-		step=optionalSteps[i];
-		if(board[step[0]][step[1]]!=4){
-			dis= Math.sqrt(Math.pow(step[0] - shape.i, 2) + Math.pow(step[1] - shape.j, 2));
-			if(dis<max && (monster.xPrev!=step[0] || monster.yPrev!=step[1])){
-				max=dis;
-				bestMove={x: step[0] ,y: step[1]};
+	optionalSteps.push([monster.x - 1, monster.y]);
+	optionalSteps.push([monster.x + 1, monster.y]);
+	optionalSteps.push([monster.x, monster.y + 1]);
+	optionalSteps.push([monster.x, monster.y - 1]);
+	for (var i = 0; i < optionalSteps.length; i++) {
+		step = optionalSteps[i];
+		if (board[step[0]][step[1]] != 4) {
+			dis = Math.sqrt(Math.pow(step[0] - shape.i, 2) + Math.pow(step[1] - shape.j, 2));
+			if (dis < max && (monster.xPrev != step[0] || monster.yPrev != step[1])) {
+				max = dis;
+				bestMove = { x: step[0], y: step[1] };
 			}
 		}
 	}
 	return bestMove;
 }
 
-function DrawMonsters(){
+function movingMonsters() {
+	//gameInterval = setInterval(() => {
+		var best;
+		for (var i = 0; i < numOfMonsters; i++) {
+			best = bestMoveForMonster(monsters[i]);
+			monsters[i].xPrev = monsters[i].x;
+			monsters[i].yPrev = monsters[i].y;
+			monsters[i].x = best.x;
+			monsters[i].y = best.y;
+		}
+	//}, 3000)
+}
+
+function DrawMonsters() {
 	for (var i = 0; i < numOfMonsters; i++) {
 		var center = new Object();
 		var monster = monsters[i];
@@ -362,28 +356,28 @@ function UpdatePosition() {
 		}
 	}
 	if (board[shape.i][shape.j] == 5) {//food- ball 5 points
-		score=score+5;
+		score = score + 5;
 		BallsAte++;
 	}
-	else if(board[shape.i][shape.j] == 15){//food- ball 15 points
-		score=score+15;
+	else if (board[shape.i][shape.j] == 15) {//food- ball 15 points
+		score = score + 15;
 		BallsAte++;
 	}
-	else if(board[shape.i][shape.j] == 25){//food- ball 25 points
-		score=score+25;
+	else if (board[shape.i][shape.j] == 25) {//food- ball 25 points
+		score = score + 25;
 		BallsAte++;
 	}
 	board[shape.i][shape.j] = 2;
-	var currentTime = new Date();
+	/*var currentTime = new Date();
 	time_elapsed = (start_time - currentTime.getSeconds) / 1000;
-	if(time_elapsed<=0)
+	if (time_elapsed <= 0)
 		gameOver();
 
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
-	}
+	}*/
 	if (BallsAte == numOfBall) {
-		window.clearInterval(interval);
+		//window.clearInterval(interval);
 		//window.alert("Game completed");
 		gameOver();
 	} else {
@@ -391,7 +385,7 @@ function UpdatePosition() {
 	}
 }
 
-function showSettings(){
+function showSettings() {
 	lblUp.value = gameKeys[0];
 	lblDown.value = gameKeys[1];
 	lblLeft.value = gameKeys[2];
@@ -407,26 +401,26 @@ function showSettings(){
 }
 /*timer of game*/
 
-function startTimer(){
+function startTimer() {
 	//setInterval(function(){
-		limitTime--;
-		lblTime.value = limitTime;
-		if (limitTime ==0) {
-			gameOver();
-		}
+	limitTime--;
+	//lblTime.value = limitTime;
+	if (limitTime == 0) {
+		gameOver();
+	}
 	//}, 4*1000);
-  }
-  function gameOver(){
-	var score=document.getElementById("lblScore");
-	if(loseGame){
+}
+function gameOver() {
+	var score = document.getElementById("lblScore");
+	if (loseGame) {
 		alert("Loser!");
 	}
-	else if(score.value<100){
-	  alert("You are better than "+score.value,"points!");
+	else if (score.value < 100) {
+		alert("You are better than " + score.value, "points!");
 	}
-	else{
-	  alert("Winner!!!");
+	else {
+		alert("Winner!!!");
 	}
-	clearInterval(intervalTime);
-  }
+	//clearInterval(intervalTime);
+}
 

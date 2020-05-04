@@ -150,10 +150,10 @@ function randomNumberOfBalls(){
 }
 
 function randonNumberOfMonsters(){
-    var numMonsters = '123';
+    var numMonsters = '1234';
     var monstersNumber='';
     for (var i = 0; i < 1; i++) {
-        monstersNumber += numMonsters[Math.floor(Math.random() * 3)];
+        monstersNumber += numMonsters[Math.floor(Math.random() * 4)];
       }
       return monstersNumber;
 }

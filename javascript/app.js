@@ -8,8 +8,8 @@ var interval;
 var timeInterval;
 var mouth_pacman;
 var food_remain;
-var monsters = [{ x: 1, y: 1, img: "./images/pink.ico", xPrev: 1, yPrev: 1 }, { x: 18, y: 18, img: "./images/red.png", xPrev: 18, yPrev: 18 }, { x: 1, y: 18, img: "./images/blue.ico", xPrev: 1, yPrev: 18 }, { x: 18, y: 1, img: "./images/green.jpg", xPrev: 18, yPrev: 1 }];
-var startMonsters = [{ x: 1, y: 1, img: "./images/pink.ico", xPrev: 1, yPrev: 1 }, { x: 18, y: 18, img: "./images/red.png", xPrev: 18, yPrev: 18 }, { x: 1, y: 18, img: "./images/blue.ico", xPrev: 1, yPrev: 18 }, { x: 18, y: 1, img: "./images/green.jpg", xPrev: 18, yPrev: 1 }];
+var monsters = [{ x: 1, y: 1, img: "./images/pink.ico", xPrev: 1, yPrev: 1 }, { x: 21, y: 15, img: "./images/red.png", xPrev: 21, yPrev: 15 }, { x: 1, y: 15, img: "./images/blue.ico", xPrev: 1, yPrev: 15 }, { x: 21, y: 1, img: "./images/green.jpg", xPrev: 21, yPrev: 1 }];
+var startMonsters =[{ x: 1, y: 1, img: "./images/pink.ico", xPrev: 1, yPrev: 1 }, { x: 21, y: 15, img: "./images/red.png", xPrev: 21, yPrev: 15 }, { x: 1, y: 15, img: "./images/blue.ico", xPrev: 1, yPrev: 15 }, { x: 21, y: 1, img: "./images/green.jpg", xPrev: 21, yPrev: 1 }];
 var board;
 var numOfBall;
 var gameKeys = [];
@@ -57,26 +57,29 @@ function Start() {
 	ball15 = 0.3 * food_remain;
 	ball25 = 0.1 * food_remain;
 	board = [
-		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
-		[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4],
-		[4, 0, 4, 4, 4, 0, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 0, 0, 4],
-		[4, 0, 4, 0, 0, 0, 4, 0, 0, 4, 0, 4, 0, 4, 0, 0, 4, 0, 0, 4],
-		[4, 0, 4, 0, 4, 0, 4, 0, 4, 4, 0, 4, 0, 4, 4, 0, 4, 0, 0, 4],
-		[4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 4, 4, 0, 4, 0, 4, 4],
-		[4, 0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4],
-		[4, 0, 4, 4, 4, 0, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 0, 0, 4],
-		[4, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4],
-		[4, 0, 4, 4, 4, 0, 4, 0, 4, 4, 0, 4, 0, 0, 4, 0, 4, 0, 0, 4],
-		[4, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
-		[4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 4, 4],
-		[4, 0, 0, 0, 0, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 0, 0, 0, 4],
-		[4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 4, 0, 4],
-		[4, 0, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
-		[4, 0, 4, 4, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4],
-		[4, 0, 0, 0, 4, 0, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 0, 4],
-		[4, 0, 4, 0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 4, 0, 4],
-		[4, 0, 4, 0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 4, 0, 4],
-		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+		[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 4, 0, 4, 4, 4, 4, 0, 4, 0, 4, 4, 0, 4],
+		[4, 0, 4, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 4, 0, 0, 4],
+		[4, 0, 4, 0, 4, 0, 4, 0, 4, 4, 0, 4, 0, 4, 4, 0, 4],
+		[4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 4, 4, 0, 4],
+		[4, 0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 4, 0, 4, 4, 4, 4, 0, 4, 0, 4, 4, 0, 4],
+		[4, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 4, 0, 4, 0, 4, 4, 0, 4, 0, 0, 4, 0, 4],
+		[4, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4],
+		[4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 0, 4, 4, 4, 4, 4],
+		[4, 0, 0, 0, 0, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4],
+		[4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4, 0, 4],
+		[4, 0, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 0, 0, 0, 4, 0, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4],
+		[4, 0, 4, 0, 4, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 0, 4, 0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4],
+		[4, 0, 4, 0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 0, 4, 0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
 
 	];
 	/*for (var i = 0; i < 10; i++) {
@@ -144,9 +147,9 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 150);
+	interval = setInterval(UpdatePosition, 250);
 	//intervalTime =  setTimeout(startTimer, 1000);
-	timeInterval = setInterval(startTimer, 3 * 1000);
+	timeInterval = setInterval(startTimer, 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
 }
 
@@ -158,14 +161,20 @@ function initPacmen() {
 }
 
 function findRandomEmptyCell(board) {
-	var i = Math.floor((Math.random() * 19) + 1);
-	var j = Math.floor((Math.random() * 19) + 1);
+	var i = Math.floor((Math.random() * 22) + 1);
+	var j = Math.floor((Math.random() * 16) + 1);
 	while (board[i][j] != 0) {
-		i = Math.floor((Math.random() * 19) + 1);
-		j = Math.floor((Math.random() * 19) + 1);
+		i = Math.floor((Math.random() * 22) + 1);
+		j = Math.floor((Math.random() * 16) + 1);
 	}
 	return [i, j];
 }
+
+window.addEventListener("keydown", function(e) {
+	if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+		e.preventDefault();
+	}
+}, false);
 
 function GetKeyPressed() {
 	if (keysDown[gameKeys[0]]) {
@@ -189,11 +198,11 @@ function Draw() {
 	//lblTime.value = time_elapsed;
 	lblLifes.value = lifes;
 	showSettings();
-	for (var i = 0; i < 20; i++) {
-		for (var j = 0; j < 20; j++) {
+	for (var i = 0; i < 23; i++) {
+		for (var j = 0; j < 17; j++) {
 			var center = new Object();
-			center.x = i * 30 + 20;
-			center.y = j * 30 + 20;
+			center.x = i * 35 + 20;
+			center.y = j * 35 + 20;
 			if (board[i][j] == 2) {//pacman
 				if (mouth_pacman == 2) { //down
 					context.beginPath();
@@ -253,7 +262,7 @@ function Draw() {
 				}
 			} else if (board[i][j] == 5) {//food- 5ball
 				context.beginPath();
-				context.arc(center.x, center.y, 7, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = colorBalls[0]; //color
 				context.fill();
 			}
@@ -265,14 +274,14 @@ function Draw() {
 			}
 			else if (board[i][j] == 25) {//food- 25ball
 				context.beginPath();
-				context.arc(center.x, center.y, 7, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 9, 0, 2 * Math.PI); // circle
 				context.fillStyle = colorBalls[2]; //color
 				context.fill();
 			}
 			else if (board[i][j] == 4) {//walls
 				var wall = new Image();
 				wall.src = "./images/wall3.jpg";
-				context.drawImage(wall, center.x - 20, center.y - 20, 30, 30);
+				context.drawImage(wall, center.x - 20, center.y - 20, 35, 35);
 				/*context.beginPath();
 				context.rect(center.x - 20, center.y - 20, 30, 30);
 				context.fillStyle = "grey"; //color
@@ -321,8 +330,8 @@ function DrawMonsters() {
 	for (var i = 0; i < numOfMonsters; i++) {
 		var center = new Object();
 		var monster = monsters[i];
-		center.x = monster.x * 30 + 20;
-		center.y = monster.y * 30 + 20;
+		center.x = monster.x * 35 + 20;
+		center.y = monster.y * 35 + 20;
 		var monster_img = new Image();
 		monster_img.width = "30px";
 		monster_img.height = "30px";
@@ -371,7 +380,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 2) {
-		if (shape.j < 20 && board[shape.i][shape.j + 1] != 4) {//down
+		if (shape.j < 17 && board[shape.i][shape.j + 1] != 4) {//down
 			shape.j++;
 			mouth_pacman = 2;
 		}
@@ -383,7 +392,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 4) {
-		if (shape.i < 20 && board[shape.i + 1][shape.j] != 4) {//right
+		if (shape.i < 22 && board[shape.i + 1][shape.j] != 4) {//right
 			shape.i++;
 			mouth_pacman = 4;
 		}
@@ -453,7 +462,11 @@ function gameOver() {
 	image.src = "win.jpg";
 	var message;
 	if (loseGame) {
+<<<<<<< HEAD
 		message = "Loser!";
+=======
+	//	alert("Loser!");
+>>>>>>> 934a6de0c5e3eebe9753fc10d1618c649b6faac4
 	}
 	else if (score.value < 100) {
 		message = "You are better than " + score + "points!";

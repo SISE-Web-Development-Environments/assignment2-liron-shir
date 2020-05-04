@@ -5,7 +5,7 @@ var pac_color;
 //var start_time;
 //var time_elapsed;
 var interval;
-var intervalTime;
+var timeInterval;
 var mouth_pacman;
 var food_remain;
 var monsters = [{ x: 1, y: 1, img: "./images/pink.ico", xPrev: 1, yPrev: 1 }, { x: 18, y: 18, img: "./images/red.png", xPrev: 18, yPrev: 18 }, { x: 1, y: 18, img: "./images/blue.ico", xPrev: 1, yPrev: 18 }, { x: 18, y: 1, img: "./images/green.jpg", xPrev: 18, yPrev: 1 }];
@@ -146,7 +146,7 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 150);
 	//intervalTime =  setTimeout(startTimer, 1000);
-	intervalTime = setInterval(startTimer, 3 * 1000);
+	timeInterval = setInterval(startTimer, 3 * 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
 }
 
@@ -352,7 +352,7 @@ function monsterHitPacmen() {
 function initGameAfterHit() {
 	board[shape.i][shape.j] = 0;
 	initPacmen();
-	for(var i=0; i<numOfMonsters; i++){
+	for (var i = 0; i < numOfMonsters; i++) {
 		monsters[i].x = startMonsters[i].x;
 		monsters[i].xPrev = startMonsters[i].xPrev;
 		monsters[i].y = startMonsters[i].y;
@@ -444,16 +444,34 @@ function startTimer() {
 	//}, 4*1000);
 }
 function gameOver() {
-	var score = document.getElementById("lblScore");
+	window.clearInterval(interval);
+	window.clearInterval(timeInterval);
+	window.clearInterval(gameInterval);
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	context = canvas.getContext("2d");
+	var image = new Image();
+	image.src = "win.jpg";
+	var message;
 	if (loseGame) {
-		alert("Loser!");
+		message = "Loser!";
 	}
 	else if (score.value < 100) {
-		alert("You are better than " + score.value, "points!");
+		message = "You are better than " + score + "points!";
 	}
 	else {
-		alert("Winner!!!");
+		message = "Winner!!!";
 	}
-	//clearInterval(intervalTime);
+	image.onload = function () {
+		context.drawImage(70, 100, 240, 400, 400);
+		context.font = "30px Verdana";
+		// Create gradient
+		var gradient = context.createLinearGradient(0, 0, canvas.width, 0);
+		gradient.addColorStop("0", " magenta");
+		gradient.addColorStop("0.5", "blue");
+		gradient.addColorStop("1.0", "red");
+		// Fill with gradient
+		context.fillStyle = gradient;
+		context.fillText(message, 240, 450);
+	}
 }
 

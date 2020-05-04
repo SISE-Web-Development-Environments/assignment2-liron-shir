@@ -128,7 +128,8 @@
 				<label for="downKey">Down key:</label>
 				<input type="text" size="20" id="down" name="down" placeholder="Select down key" autocomplete="off"><br>
 				<label for="rightKey">Right key:</label>
-				<input type="text" size="20" id="right" name="right" placeholder="Select right key" autocomplete="off"><br>
+				<input type="text" size="20" id="right" name="right" placeholder="Select right key"
+					autocomplete="off"><br>
 				<label for="leftKey">Left key:</label>
 				<input type="text" size="20" id="left" name="left" placeholder="Select left key" autocomplete="off"><br>
 				<label>Number of balls:
@@ -207,6 +208,9 @@
 
 		<div id="game">
 			<p id="welcome_user" class="welcome_user"></p>
+			<div id="newGame">
+				<button onclick="newGame()">New game</button>
+			</div>
 			<canvas id="canvas" height="500" width="800" style="width:50%;"></canvas>
 		</div>
 	</div>

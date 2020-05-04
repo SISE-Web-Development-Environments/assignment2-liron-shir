@@ -149,8 +149,8 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 250);
 	//intervalTime =  setTimeout(startTimer, 1000);
-	timeInterval = setInterval(startTimer, 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
+	timeInterval = setInterval(startTimer, 3*1000);
 }
 
 function initPacmen() {
@@ -462,11 +462,7 @@ function gameOver() {
 	image.src = "win.jpg";
 	var message;
 	if (loseGame) {
-<<<<<<< HEAD
 		message = "Loser!";
-=======
-	//	alert("Loser!");
->>>>>>> 934a6de0c5e3eebe9753fc10d1618c649b6faac4
 	}
 	else if (score.value < 100) {
 		message = "You are better than " + score + "points!";

@@ -85,8 +85,14 @@ function Start() {
 	];
 
 	initPacmen();
+<<<<<<< HEAD
 	initPizza();
 	initMonsters();
+=======
+	
+	initMonsters();
+	initClockAndDrugs();
+>>>>>>> 8d36b333fa05ca159f342fc101f95613a56aee1f
 	while (food_remain > 0) {
 		emptyCell = findRandomEmptyCell(board);
 		if (ball5 > 0) {
@@ -148,6 +154,15 @@ function initPacmen() {
 	 }
 
  }
+
+function initClockAndDrugs(){
+	var emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = 9; //clock
+	emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] =10; //drug 
+	emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] =10; //drug 
+}
 
 function findRandomEmptyCell(board) {
 	var i = Math.floor((Math.random() * 22) + 1);
@@ -238,7 +253,6 @@ function Draw() {
 					context.fill();
 				}
 				else {
-
 					context.beginPath();
 					context.arc(center.x, center.y, 10, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 					context.lineTo(center.x, center.y);
@@ -275,6 +289,16 @@ function Draw() {
 				context.rect(center.x - 20, center.y - 20, 30, 30);
 				context.fillStyle = "grey"; //color
 				context.fill();*/
+			}
+			else if(board[i][j] == 9){//clock
+				var clock = new Image();
+				clock.src ="./images/clock.png";
+				context.drawImage(clock, center.x - 20, center.y - 20, 35, 35);
+			}
+			else if(board[i][j] == 10){//drug
+				var drug = new Image();
+				drug.src ="./images/drug.png";
+				context.drawImage(drug, center.x - 20, center.y - 20, 35, 35);
 			}
 		}
 	}
@@ -453,6 +477,12 @@ function UpdatePosition() {
 		score = score + 25;
 		BallsAte++;
 	}
+	else if(board[shape.i][shape.j] == 9){ //clock
+		limitTime = limitTime + 60;
+	}
+	else if(board[shape.i][shape.j] == 10){
+		lifes++;
+	}
 	board[shape.i][shape.j] = 2;
 	/*var currentTime = new Date();
 	time_elapsed = (start_time - currentTime.getSeconds) / 1000;
@@ -486,7 +516,10 @@ function showSettings() {
 	lblMonsters.value = numOfMonsters;
 }
 /*timer of game*/
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8d36b333fa05ca159f342fc101f95613a56aee1f
 function startTimer() {
 	limitTime--;
 	//lblTime.value = limitTime;

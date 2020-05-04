@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<script src="./jquery-3.4.1.slim.min.js"></script>
-		<script type="text/javascript" src="./app.js"></script>
+
+<head>
 	<!--check the links (model dialog- about)-->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +21,7 @@
 	<header width:25%;>
 		<p><img src="images/pac2.png" width="400px"></p>
 		<p><b> Shir Ben-Dor 204675797 | Liron Ben-Yakov 204385884 </b></p>
-	<!---	<p><img src="images/pac1.png" width="50px"><img src="images/pac3.png" width="50px"></p>-->
+		<!---	<p><img src="images/pac1.png" width="50px"><img src="images/pac3.png" width="50px"></p>-->
 		<p></p>
 	</header>
 	<div id="menu">
@@ -125,13 +124,13 @@
 			<fieldset>
 				<legend><b>SETTING:</b></legend>
 				<label for="upKey">Up key:</label>
-				<input type="text" size="20" id="up" name="up" placeholder="Select up key"><br>
+				<input type="text" size="20" id="up" name="up" placeholder="Select up key" autocomplete="off"><br>
 				<label for="downKey">Down key:</label>
-				<input type="text" size="20" id="down" name="down" placeholder="Select down key"><br>
+				<input type="text" size="20" id="down" name="down" placeholder="Select down key" autocomplete="off"><br>
 				<label for="rightKey">Right key:</label>
-				<input type="text" size="20" id="right" name="right" placeholder="Select right key"><br>
+				<input type="text" size="20" id="right" name="right" placeholder="Select right key" autocomplete="off"><br>
 				<label for="leftKey">Left key:</label>
-				<input type="text" size="20" id="left" name="left" placeholder="Select left key"><br>
+				<input type="text" size="20" id="left" name="left" placeholder="Select left key" autocomplete="off"><br>
 				<label>Number of balls:
 					<div class="slidecontainer">
 						<input type="range" id="numberOfBalls" min="50" max="90" value="50" class="slider"
@@ -161,32 +160,32 @@
 			</div>
 			<div id="time">
 				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" size="10"/>
+				<input id="lblTime" type="text" size="10" />
 			</div>
 			<div id="lives">
 				<label for="lblLives">LIFES:</label>
-				<input id="lblLives" value="" type="text" size="10"/>
+				<input id="lblLives" value="" type="text" size="10" />
 			</div>
 			<br>
 			<div id="upSetting">
 				<label for="lblUp">UP key:</label>
-				<input id="lblUp" value="" type="text" size="10"/>
+				<input id="lblUp" value="" type="text" size="10" />
 			</div>
 			<div id="downSetting">
 				<label for="lblDown">Down key:</label>
-				<input id="lblDown" value="" type="text" size="10"/>
+				<input id="lblDown" value="" type="text" size="10" />
 			</div>
 			<div id="rightSetting">
 				<label for="lblRight">RIGHT key:</label>
-				<input id="lblRight" value="" type="text" size="10"/>
+				<input id="lblRight" value="" type="text" size="10" />
 			</div>
 			<div id="leftSetting">
 				<label for="lblLeft">LEFT key:</label>
-				<input id="lblLeft" value="" type="text" size="10"/>
+				<input id="lblLeft" value="" type="text" size="10" />
 			</div>
 			<div id="ballSetting">
 				<label for="lblBalls">BALLS:</label>
-				<input id="lblBalls" type="text" size="10"/>
+				<input id="lblBalls" type="text" size="10" />
 			</div>
 			<div id="ball5Setting">
 				<label for="lblBall5">5 POINTS:</label>
@@ -198,17 +197,17 @@
 			</div>
 			<div id="ball25Setting">
 				<label for="lblBall25">25 POINTS:</label>
-				<input id="lblBall25"  value="#87F7F5" type="color" />
+				<input id="lblBall25" value="#87F7F5" type="color" />
 			</div>
 			<div id="monstersSetting">
 				<label for="lblMonsters">MONSTERS:</label>
-				<input id="lblMonsters" type="text" size="10"/>
+				<input id="lblMonsters" type="text" size="10" />
 			</div>
 		</div>
 
-		<div id="game" >
+		<div id="game">
 			<p id="welcome_user" class="welcome_user"></p>
-			<canvas id="canvas" height="500" width="800"  style=" width:50%;border:2px solid white;
+			<canvas id="canvas" height="500" width="800" style=" width:50%;border:2px solid white;
 			border-radius:10px; box-shadow:0 0 3px #AAA;"></canvas>
 		</div>
 	</div>
@@ -235,5 +234,5 @@
 	<script src="javascript/functions.js"></script>
 	<script src="javascript/settingFunc.js"></script>
 </body>
-</html>
 
+</html>

@@ -24,7 +24,7 @@ var loseGame;
 var BallsAte;
 var lifes;
 var gameInterval;
-var pizza={x:21,y:1,img:"./images/piz.png",xPrev: 21, yPrev: 1, active:true};
+var pizza = { x: 21, y: 1, img: "./images/piz.png", xPrev: 21, yPrev: 1, active: true };
 
 $(document).ready(function () {
 	context = canvas.getContext("2d");
@@ -83,35 +83,6 @@ function Start() {
 		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
 
 	];
-	/*for (var i = 0; i < 10; i++) {
-		//board[i] = new Array();
-		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < 10; j++) {
-			if (
-				(i == 3 && j == 3) ||
-				(i == 3 && j == 4) ||
-				(i == 3 && j == 5) ||
-				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)
-			) {
-				board[i][j] = 4;
-			} else {
-				var randomNum = Math.random();
-				if (randomNum <= (1.0 * food_remain) / cnt) {
-					food_remain--;
-					board[i][j] = 1;
-				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
-					shape.i = i;
-					shape.j = j;
-					pacman_remain--;
-					board[i][j] = 2;
-				} else {
-					board[i][j] = 0;
-				}
-				cnt--;// no criti
-			}
-		}
-	}*/
 
 	initPacmen();
 	while (food_remain > 0) {
@@ -151,10 +122,6 @@ function Start() {
 	//intervalTime =  setTimeout(startTimer, 1000);
 	timeInterval = setInterval(startTimer, 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
-<<<<<<< HEAD
-
-=======
->>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 }
 
 function initPacmen() {
@@ -298,16 +265,16 @@ function Draw() {
 	DrawPizza();
 }
 
-function DrawPizza(){
-	if(pizza.active==true){
+function DrawPizza() {
+	if (pizza.active == true) {
 		var center = new Object();
-		if(numOfMonsters!=4){
-		center.x = pizza.x * 35 + 20;
-		center.y = pizza.y * 35 + 20;
-		}else{
-		var emptyCell = findRandomEmptyCell(board);
-		center.x = emptyCell[0] * 35 + 20;
-		center.y = emptyCell[1] * 35 + 20;
+		if (numOfMonsters != 4) {
+			center.x = pizza.x * 35 + 20;
+			center.y = pizza.y * 35 + 20;
+		} else {
+			var emptyCell = findRandomEmptyCell(board);
+			center.x = emptyCell[0] * 35 + 20;
+			center.y = emptyCell[1] * 35 + 20;
 		}
 		var pizza_img = new Image();
 		pizza_img.width = "30px";
@@ -386,16 +353,12 @@ function monsterHitPacmen() {
 function initGameAfterHit() {
 	board[shape.i][shape.j] = 0;
 	initPacmen();
-<<<<<<< HEAD
-	for(var i=0; i<numOfMonsters; i++){
-=======
 	initMonsters();
 
 }
 
-function initMonsters(){
+function initMonsters() {
 	for (var i = 0; i < numOfMonsters; i++) {
->>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 		monsters[i].x = startMonsters[i].x;
 		monsters[i].xPrev = startMonsters[i].xPrev;
 		monsters[i].y = startMonsters[i].y;
@@ -475,44 +438,32 @@ function showSettings() {
 	lblBall25.style["background-color"] = colorBalls[2];
 	lblMonsters.value = numOfMonsters;
 }
-/*timer of game*/
+/timer of game/
 
 function startTimer() {
-	//setInterval(function(){
 	limitTime--;
 	//lblTime.value = limitTime;
 	if (limitTime == 0) {
 		gameOver();
 	}
-	//}, 4*1000);
 }
 function gameOver() {
-<<<<<<< HEAD
-	var score = document.getElementById("lblScore");
-=======
 	window.clearInterval(interval);
 	window.clearInterval(timeInterval);
 	window.clearInterval(gameInterval);
 	var message;
->>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 	if (loseGame) {
-	//	alert("Loser!");
+		message = "Loser!";
 	}
 	else if (score.value < 100) {
-		alert("You are better than " + score.value, "points!");
+		message = "You are better than " + score + "points!";
 	}
 	else {
-<<<<<<< HEAD
-		alert("Winner!!!");
-	}
-	//clearInterval(intervalTime);
-=======
 		message = "Winner!!!";
 	}
+	alert(message);
 }
 function newGame() {
 	initMonsters();
 	Start();
->>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 }
-

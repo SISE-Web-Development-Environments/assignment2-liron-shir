@@ -24,6 +24,7 @@ var loseGame;
 var BallsAte;
 var lifes;
 var gameInterval;
+var pizza={x:21,y:1,img:"./images/piz.png",xPrev: 21, yPrev: 1, active:true};
 
 $(document).ready(function () {
 	context = canvas.getContext("2d");
@@ -149,8 +150,9 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 250);
 	//intervalTime =  setTimeout(startTimer, 1000);
+	timeInterval = setInterval(startTimer, 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
-	timeInterval = setInterval(startTimer, 3*1000);
+
 }
 
 function initPacmen() {
@@ -291,7 +293,28 @@ function Draw() {
 	}
 	//movingMonsters();
 	DrawMonsters();
+	DrawPizza();
 }
+
+function DrawPizza(){
+	if(pizza.active==true){
+		var center = new Object();
+		if(numOfMonsters!=4){
+		center.x = pizza.x * 35 + 20;
+		center.y = pizza.y * 35 + 20;
+		}else{
+		var emptyCell = findRandomEmptyCell(board);
+		center.x = emptyCell[0] * 35 + 20;
+		center.y = emptyCell[1] * 35 + 20;
+		}
+		var pizza_img = new Image();
+		pizza_img.width = "30px";
+		pizza_img.height = "30px";
+		pizza_img.src = pizza.img;
+		context.drawImage(pizza_img, center.x - 20, center.y - 20, 35, 35);
+	}
+}
+
 function bestMoveForMonster(monster) {
 	var optionalSteps = new Array();
 	var max = Number.MAX_SAFE_INTEGER;
@@ -361,7 +384,7 @@ function monsterHitPacmen() {
 function initGameAfterHit() {
 	board[shape.i][shape.j] = 0;
 	initPacmen();
-	for (var i = 0; i < numOfMonsters; i++) {
+	for(var i=0; i<numOfMonsters; i++){
 		monsters[i].x = startMonsters[i].x;
 		monsters[i].xPrev = startMonsters[i].xPrev;
 		monsters[i].y = startMonsters[i].y;
@@ -453,34 +476,16 @@ function startTimer() {
 	//}, 4*1000);
 }
 function gameOver() {
-	window.clearInterval(interval);
-	window.clearInterval(timeInterval);
-	window.clearInterval(gameInterval);
-	context.clearRect(0, 0, canvas.width, canvas.height);
-	context = canvas.getContext("2d");
-	var image = new Image();
-	image.src = "win.jpg";
-	var message;
+	var score = document.getElementById("lblScore");
 	if (loseGame) {
-		message = "Loser!";
+	//	alert("Loser!");
 	}
 	else if (score.value < 100) {
-		message = "You are better than " + score + "points!";
+		alert("You are better than " + score.value, "points!");
 	}
 	else {
-		message = "Winner!!!";
+		alert("Winner!!!");
 	}
-	image.onload = function () {
-		context.drawImage(70, 100, 240, 400, 400);
-		context.font = "30px Verdana";
-		// Create gradient
-		var gradient = context.createLinearGradient(0, 0, canvas.width, 0);
-		gradient.addColorStop("0", " magenta");
-		gradient.addColorStop("0.5", "blue");
-		gradient.addColorStop("1.0", "red");
-		// Fill with gradient
-		context.fillStyle = gradient;
-		context.fillText(message, 240, 450);
-	}
+	//clearInterval(intervalTime);
 }
 

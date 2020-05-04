@@ -49,7 +49,7 @@ function setting() {
 }
 
 /*login form*/
-function loginButton(element) {
+function loginButton() {
   var userCheck = document.getElementById("checkUsername").value;
   var passwordCheck = document.getElementById("checkPassword").value;
   for (var i = 0; i < users.length; i++) {

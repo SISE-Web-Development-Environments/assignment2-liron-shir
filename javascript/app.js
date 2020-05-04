@@ -9,7 +9,7 @@ var timeInterval;
 var mouth_pacman;
 var food_remain;
 var monsters = [{ x: 1, y: 1, img: "./images/pink.ico", xPrev: 1, yPrev: 1 }, { x: 21, y: 15, img: "./images/red.png", xPrev: 21, yPrev: 15 }, { x: 1, y: 15, img: "./images/blue.ico", xPrev: 1, yPrev: 15 }, { x: 21, y: 1, img: "./images/green.jpg", xPrev: 21, yPrev: 1 }];
-var startMonsters =[{ x: 1, y: 1, img: "./images/pink.ico", xPrev: 1, yPrev: 1 }, { x: 21, y: 15, img: "./images/red.png", xPrev: 21, yPrev: 15 }, { x: 1, y: 15, img: "./images/blue.ico", xPrev: 1, yPrev: 15 }, { x: 21, y: 1, img: "./images/green.jpg", xPrev: 21, yPrev: 1 }];
+var startMonsters = [{ x: 1, y: 1, img: "./images/pink.ico", xPrev: 1, yPrev: 1 }, { x: 21, y: 15, img: "./images/red.png", xPrev: 21, yPrev: 15 }, { x: 1, y: 15, img: "./images/blue.ico", xPrev: 1, yPrev: 15 }, { x: 21, y: 1, img: "./images/green.jpg", xPrev: 21, yPrev: 1 }];
 var board;
 var numOfBall;
 var gameKeys = [];
@@ -113,7 +113,6 @@ function Start() {
 	}*/
 
 	initPacmen();
-
 	while (food_remain > 0) {
 		emptyCell = findRandomEmptyCell(board);
 		if (ball5 > 0) {
@@ -149,8 +148,8 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 250);
 	//intervalTime =  setTimeout(startTimer, 1000);
+	timeInterval = setInterval(startTimer, 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
-	timeInterval = setInterval(startTimer, 3*1000);
 }
 
 function initPacmen() {
@@ -170,8 +169,8 @@ function findRandomEmptyCell(board) {
 	return [i, j];
 }
 
-window.addEventListener("keydown", function(e) {
-	if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+window.addEventListener("keydown", function (e) {
+	if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
 		e.preventDefault();
 	}
 }, false);
@@ -361,6 +360,11 @@ function monsterHitPacmen() {
 function initGameAfterHit() {
 	board[shape.i][shape.j] = 0;
 	initPacmen();
+	initMonsters();
+
+}
+
+function initMonsters(){
 	for (var i = 0; i < numOfMonsters; i++) {
 		monsters[i].x = startMonsters[i].x;
 		monsters[i].xPrev = startMonsters[i].xPrev;
@@ -456,10 +460,6 @@ function gameOver() {
 	window.clearInterval(interval);
 	window.clearInterval(timeInterval);
 	window.clearInterval(gameInterval);
-	context.clearRect(0, 0, canvas.width, canvas.height);
-	context = canvas.getContext("2d");
-	var image = new Image();
-	image.src = "win.jpg";
 	var message;
 	if (loseGame) {
 		message = "Loser!";
@@ -470,17 +470,9 @@ function gameOver() {
 	else {
 		message = "Winner!!!";
 	}
-	image.onload = function () {
-		context.drawImage(70, 100, 240, 400, 400);
-		context.font = "30px Verdana";
-		// Create gradient
-		var gradient = context.createLinearGradient(0, 0, canvas.width, 0);
-		gradient.addColorStop("0", " magenta");
-		gradient.addColorStop("0.5", "blue");
-		gradient.addColorStop("1.0", "red");
-		// Fill with gradient
-		context.fillStyle = gradient;
-		context.fillText(message, 240, 450);
-	}
+}
+function newGame() {
+	initMonsters();
+	Start();
 }
 

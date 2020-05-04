@@ -151,10 +151,6 @@ function Start() {
 	//intervalTime =  setTimeout(startTimer, 1000);
 	timeInterval = setInterval(startTimer, 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
-<<<<<<< HEAD
-
-=======
->>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 }
 
 function initPacmen() {
@@ -386,16 +382,12 @@ function monsterHitPacmen() {
 function initGameAfterHit() {
 	board[shape.i][shape.j] = 0;
 	initPacmen();
-<<<<<<< HEAD
-	for(var i=0; i<numOfMonsters; i++){
-=======
 	initMonsters();
 
 }
 
 function initMonsters(){
 	for (var i = 0; i < numOfMonsters; i++) {
->>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 		monsters[i].x = startMonsters[i].x;
 		monsters[i].xPrev = startMonsters[i].xPrev;
 		monsters[i].y = startMonsters[i].y;
@@ -487,14 +479,10 @@ function startTimer() {
 	//}, 4*1000);
 }
 function gameOver() {
-<<<<<<< HEAD
-	var score = document.getElementById("lblScore");
-=======
 	window.clearInterval(interval);
 	window.clearInterval(timeInterval);
 	window.clearInterval(gameInterval);
 	var message;
->>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 	if (loseGame) {
 	//	alert("Loser!");
 	}
@@ -502,17 +490,11 @@ function gameOver() {
 		alert("You are better than " + score.value, "points!");
 	}
 	else {
-<<<<<<< HEAD
-		alert("Winner!!!");
-	}
-	//clearInterval(intervalTime);
-=======
 		message = "Winner!!!";
 	}
 }
 function newGame() {
 	initMonsters();
 	Start();
->>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 }
 

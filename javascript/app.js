@@ -24,7 +24,7 @@ var loseGame;
 var BallsAte;
 var lifes;
 var gameInterval;
-var pizza = [{ x: 21, y: 1, img: "./images/piz.png", xPrev: 21, yPrev: 1, active: true }];
+var pizza = { x: 21, y: 1, img: "./images/piz.png", xPrev: 21, yPrev: 1, active: true };
 
 $(document).ready(function () {
 	context = canvas.getContext("2d");
@@ -134,18 +134,19 @@ function initPacmen() {
 	board[emptyCell[0]][emptyCell[1]] = 2; //pacmen
 }
  function initPizza(){
+	 pizza.active=true;
 	 if( numOfMonsters==4){
 		var emptyCell = findRandomEmptyCell(board);
-		pizza[0].x=emptyCell[0];
-		pizza[0].y=emptyCell[1];
-		pizza[0].xPrev=emptyCell[0];
-		pizza[0].yPrev=emptyCell[1];
+		pizza.x=emptyCell[0];
+		pizza.y=emptyCell[1];
+		pizza.xPrev=emptyCell[0];
+		pizza.yPrev=emptyCell[1];
 	 }
 	 else{
-		 pizza[0].x=21;
-		 pizza[0].y=1;
-		 pizza[0].xPrev=21;
-		 pizza[0].yPrev=1;
+		 pizza.x=21;
+		 pizza.y=1;
+		 pizza.xPrev=21;
+		 pizza.yPrev=1;
 	 }
 
  }
@@ -288,7 +289,7 @@ function Draw() {
 			else if(board[i][j] == 9){//clock
 				var clock = new Image();
 				clock.src ="./images/clock.png";
-				context.drawImage(clock, center.x - 20, center.y - 20, 35, 35);
+				context.drawImage(clock, center.x - 20, center.y - 20, 30, 30);
 			}
 			else if(board[i][j] == 10){//drug
 				var drug = new Image();
@@ -304,33 +305,36 @@ function Draw() {
 }
 
 function DrawPizza() {
-	if (pizza[0].active == true) {
+	if (pizza.active == true) {
 		var center = new Object();
-		center.x = pizza[0].x * 35 + 20;
-		center.y = pizza[0].y * 35 + 20;
+		center.x = pizza.x * 35 + 20;
+		center.y = pizza.y * 35 + 20;
 		var pizza_img = new Image();
 		pizza_img.width = "30px";
 		pizza_img.height = "30px";
-		pizza_img.src = pizza[0].img;
+		pizza_img.src = pizza.img;
 		context.drawImage(pizza_img, center.x - 20, center.y - 20, 35, 35);
+		if (pizza.x == shape.i && pizza.y == shape.j) {
+			score = score + 50;
+			pizza.active = false;
+		}
 	}
 }
-
 function bestMoveForPizza() {
 	var optionalSteps = new Array();
 	var min = Number.MIN_SAFE_INTEGER;
 	var bestMove;
 	var step;
 	var dis;
-	optionalSteps.push([pizza[0].x - 1, pizza[0].y]);
-	optionalSteps.push([pizza[0].x + 1, pizza[0].y]);
-	optionalSteps.push([pizza[0].x, pizza[0].y + 1]);
-	optionalSteps.push([pizza[0].x, pizza[0].y - 1]);
+	optionalSteps.push([pizza.x - 1, pizza.y]);
+	optionalSteps.push([pizza.x + 1, pizza.y]);
+	optionalSteps.push([pizza.x, pizza.y + 1]);
+	optionalSteps.push([pizza.x, pizza.y - 1]);
 	for (var i = 0; i < optionalSteps.length; i++) {
 		step = optionalSteps[i];
 		if (board[step[0]][step[1]] != 4) {
 			dis = Math.sqrt(Math.pow(step[0] - shape.i, 2) + Math.pow(step[1] - shape.j, 2));
-			if (dis > min && (pizza[0].xPrev != step[0] || pizza[0].yPrev != step[1])) {
+			if (dis > min && (pizza.xPrev != step[0] || pizza.yPrev != step[1])) {
 				min = dis;
 				bestMove = { x: step[0], y: step[1] };
 			}
@@ -343,10 +347,10 @@ function bestMoveForPizza() {
 function movingPizza(){
 	var best;
 	best = bestMoveForPizza();
-	pizza[0].xPrev=pizza[0].x;
-	pizza[0].yPrev=pizza[0].y;
-	pizza[0].x=best.x;
-	pizza[0].y=best.y;
+	pizza.xPrev=pizza.x;
+	pizza.yPrev=pizza.y;
+	pizza.x=best.x;
+	pizza.y=best.y;
 }
 
 function bestMoveForMonster(monster) {
@@ -401,6 +405,8 @@ function DrawMonsters() {
 		}
 	}
 }
+
+
 
 function monsterHitPacmen() {
 	if (lifes > 1) {

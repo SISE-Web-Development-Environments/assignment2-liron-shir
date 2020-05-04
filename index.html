@@ -154,63 +154,71 @@
 	</div>
 
 	<div id="canvesDiv">
-		<div id="setting_board" class="setting_board">
-			<div id="score">
-				<label for="lblScore">SCORE:</label>
-				<input id="lblScore" type="text" size="10" />
-			</div>
-			<div id="time">
-				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" size="10" />
-			</div>
-			<div id="lifes">
-				<label for="lblLifes">LIFES:</label>
-				<input id="lblLifes" value="" type="text" size="10" />
+		<div id="left" class="left">
+			<p id="welcome_user" class="welcome_user"></p>
+
+			<div id="setting_board" class="setting_board">
+				<p class="welcome_user"><u>Setting :</u></p>
+				
+				<div id="score">
+					<label for="lblScore">SCORE:</label>
+					<input id="lblScore" type="text" size="10"/>
+				</div>
+				<div id="time">
+					<label for="lblTime">TIME:</label>
+					<input id="lblTime" type="text" size="10" />
+				</div>
+				<div id="lifes">
+					<label for="lblLifes">LIFES:</label>
+					<input id="lblLifes" value="" type="text" size="10" />
+				</div>
+			
+				<div id="upSetting">
+					<label for="lblUp">UP key:</label>
+					<input id="lblUp" value="" type="text" size="10" />
+				</div>
+				<div id="downSetting">
+					<label for="lblDown">Down key:</label>
+					<input id="lblDown" value="" type="text" size="10" />
+				</div>
+				<div id="rightSetting">
+					<label for="lblRight">RIGHT key:</label>
+					<input id="lblRight" value="" type="text" size="10" />
+				</div>
+				<div id="leftSetting">
+					<label for="lblLeft">LEFT key:</label>
+					<input id="lblLeft" value="" type="text" size="10" />
+				</div>
+				<div id="ballSetting">
+					<label for="lblBalls">BALLS:</label>
+					<input id="lblBalls" type="text" size="10" />
+				</div>
+				<div id="ball5Setting">
+					<label for="lblBall5">5 POINTS:</label>
+					<input id="lblBall5" value="#F996B8" type="color" />
+				</div>
+				<div id="ball15Setting">
+					<label for="lblBall15">15 POINTS:</label>
+					<input id="lblBall15" value="#CE96F9" type="color" />
+				</div>
+				<div id="ball25Setting">
+					<label for="lblBall25">25 POINTS:</label>
+					<input id="lblBall25" value="#87F7F5" type="color" />
+				</div>
+				<div id="monstersSetting">
+					<label for="lblMonsters">MONSTERS:</label>
+					<input id="lblMonsters" type="text" size="10" />
+				</div>
+				
 			</div>
 			<br>
-			<div id="upSetting">
-				<label for="lblUp">UP key:</label>
-				<input id="lblUp" value="" type="text" size="10" />
-			</div>
-			<div id="downSetting">
-				<label for="lblDown">Down key:</label>
-				<input id="lblDown" value="" type="text" size="10" />
-			</div>
-			<div id="rightSetting">
-				<label for="lblRight">RIGHT key:</label>
-				<input id="lblRight" value="" type="text" size="10" />
-			</div>
-			<div id="leftSetting">
-				<label for="lblLeft">LEFT key:</label>
-				<input id="lblLeft" value="" type="text" size="10" />
-			</div>
-			<div id="ballSetting">
-				<label for="lblBalls">BALLS:</label>
-				<input id="lblBalls" type="text" size="10" />
-			</div>
-			<div id="ball5Setting">
-				<label for="lblBall5">5 POINTS:</label>
-				<input id="lblBall5" value="#F996B8" type="color" />
-			</div>
-			<div id="ball15Setting">
-				<label for="lblBall15">15 POINTS:</label>
-				<input id="lblBall15" value="#CE96F9" type="color" />
-			</div>
-			<div id="ball25Setting">
-				<label for="lblBall25">25 POINTS:</label>
-				<input id="lblBall25" value="#87F7F5" type="color" />
-			</div>
-			<div id="monstersSetting">
-				<label for="lblMonsters">MONSTERS:</label>
-				<input id="lblMonsters" type="text" size="10" />
-			</div>
-		</div>
-
-		<div id="game">
-			<p id="welcome_user" class="welcome_user"></p>
 			<div id="newGame">
-				<button onclick="newGame()" type="submit">New game</button>
+				<button onclick="newGame()" type="submit"><B>New game</B></button>
 			</div>
+			<br>
+			<br>
+		</div>
+		<div id="game">
 			<canvas id="canvas" height="590" width="800" style="width:50%;"></canvas>
 		</div>
 	</div>

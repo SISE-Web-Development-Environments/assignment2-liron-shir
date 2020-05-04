@@ -137,15 +137,23 @@ footer
       }
     /*canvesDiv*/
     .setting_board{
-        margin: 0 2% ;
-        background: rgba(22, 18, 31, 0.52);
-        float:right;
-        width: 25%;
-    
+      margin: 0 2% ;
+      background: rgba(22, 18, 31, 0.52);
+      width: 100%;
+      text-align: left;
+      border:2px solid white;
+      border-radius:10px; 
+      box-shadow:0 0 3px #AAA;
+      
     }
+   
+    .left{
+     float:left;
+     width: 20%;
+        }      
+
     .welcome_user{
     font-size: 30px;
-    
     }
     #canvas{
       background-color: #e0d5eb;

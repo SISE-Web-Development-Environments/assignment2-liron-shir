@@ -150,11 +150,33 @@ footer
     .left{
      float:left;
      width: 20%;
-        }      
+        }   
+        
+    .center{
+          margin: 0 30%;
+          width: 40%;
+        }
 
     .welcome_user{
     font-size: 30px;
     }
+
+    .col-sm-4{
+      color: black;
+        padding-bottom: 16px;
+   }
+   .col-sm-4{
+        color: black;
+        font-size: 12px;
+        padding-bottom: 2px;
+        padding-left: 18px;
+   }
+  /*
+input[type="text"]{
+    background: transparent;
+    border: none;
+    size: 10%;
+  }*/
     #canvas{
       background-color: #e0d5eb;
       border:2px solid white;

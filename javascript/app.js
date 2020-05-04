@@ -9,7 +9,7 @@ var timeInterval;
 var mouth_pacman;
 var food_remain;
 var monsters = [{ x: 1, y: 1, img: "./images/pink.ico", xPrev: 1, yPrev: 1 }, { x: 21, y: 15, img: "./images/red.png", xPrev: 21, yPrev: 15 }, { x: 1, y: 15, img: "./images/blue.ico", xPrev: 1, yPrev: 15 }, { x: 21, y: 1, img: "./images/green.jpg", xPrev: 21, yPrev: 1 }];
-var startMonsters =[{ x: 1, y: 1, img: "./images/pink.ico", xPrev: 1, yPrev: 1 }, { x: 21, y: 15, img: "./images/red.png", xPrev: 21, yPrev: 15 }, { x: 1, y: 15, img: "./images/blue.ico", xPrev: 1, yPrev: 15 }, { x: 21, y: 1, img: "./images/green.jpg", xPrev: 21, yPrev: 1 }];
+var startMonsters = [{ x: 1, y: 1, img: "./images/pink.ico", xPrev: 1, yPrev: 1 }, { x: 21, y: 15, img: "./images/red.png", xPrev: 21, yPrev: 15 }, { x: 1, y: 15, img: "./images/blue.ico", xPrev: 1, yPrev: 15 }, { x: 21, y: 1, img: "./images/green.jpg", xPrev: 21, yPrev: 1 }];
 var board;
 var numOfBall;
 var gameKeys = [];
@@ -114,7 +114,6 @@ function Start() {
 	}*/
 
 	initPacmen();
-
 	while (food_remain > 0) {
 		emptyCell = findRandomEmptyCell(board);
 		if (ball5 > 0) {
@@ -152,7 +151,10 @@ function Start() {
 	//intervalTime =  setTimeout(startTimer, 1000);
 	timeInterval = setInterval(startTimer, 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
+<<<<<<< HEAD
 
+=======
+>>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 }
 
 function initPacmen() {
@@ -172,8 +174,8 @@ function findRandomEmptyCell(board) {
 	return [i, j];
 }
 
-window.addEventListener("keydown", function(e) {
-	if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+window.addEventListener("keydown", function (e) {
+	if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
 		e.preventDefault();
 	}
 }, false);
@@ -384,7 +386,16 @@ function monsterHitPacmen() {
 function initGameAfterHit() {
 	board[shape.i][shape.j] = 0;
 	initPacmen();
+<<<<<<< HEAD
 	for(var i=0; i<numOfMonsters; i++){
+=======
+	initMonsters();
+
+}
+
+function initMonsters(){
+	for (var i = 0; i < numOfMonsters; i++) {
+>>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 		monsters[i].x = startMonsters[i].x;
 		monsters[i].xPrev = startMonsters[i].xPrev;
 		monsters[i].y = startMonsters[i].y;
@@ -476,7 +487,14 @@ function startTimer() {
 	//}, 4*1000);
 }
 function gameOver() {
+<<<<<<< HEAD
 	var score = document.getElementById("lblScore");
+=======
+	window.clearInterval(interval);
+	window.clearInterval(timeInterval);
+	window.clearInterval(gameInterval);
+	var message;
+>>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 	if (loseGame) {
 	//	alert("Loser!");
 	}
@@ -484,8 +502,17 @@ function gameOver() {
 		alert("You are better than " + score.value, "points!");
 	}
 	else {
+<<<<<<< HEAD
 		alert("Winner!!!");
 	}
 	//clearInterval(intervalTime);
+=======
+		message = "Winner!!!";
+	}
+}
+function newGame() {
+	initMonsters();
+	Start();
+>>>>>>> cfc96140254c7bdb85041f33b5a194c6b4492b17
 }
 

@@ -291,7 +291,7 @@ function Draw() {
 			}
 			else if (board[i][j] == 4) {//walls
 				var wall = new Image();
-				wall.src = "./images/wall3.jpg";
+				wall.src = "./images/wall.png";
 				context.drawImage(wall, center.x - 20, center.y - 20, 35, 35);
 				/*context.beginPath();
 				context.rect(center.x - 20, center.y - 20, 30, 30);
@@ -421,11 +421,12 @@ function DrawMonsters() {
 
 
 function monsterHitPacmen() {
+	var drugs = document.getElementById("lblLifes");
+         drugs.removeChild(drugs.lastChild);
 	if (lives > 1) {
 		lives--;
 		//lblLifes.value = lifes;
-		var drugs = document.getElementById("lblLifes");
-         drugs.removeChild(drugs.lastChild);
+		
 		score = score - 10;
 		lblScore.value = score
 
@@ -434,8 +435,9 @@ function monsterHitPacmen() {
 	else {
 		loseGame = true;
 		startMusic.pause();
-		gameOver()
+		gameOver();
 	}
+	
 }
 
 function initGameAfterHit() {

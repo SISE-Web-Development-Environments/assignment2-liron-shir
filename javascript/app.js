@@ -24,6 +24,9 @@ var BallsAte;
 var lives;
 var gameInterval;
 var pizza = { x: 21, y: 1, img: "./images/piz.png", xPrev: 21, yPrev: 1, active: true };
+var playMusic;
+var startMusic;
+var music;
 
 $(document).ready(function () {
 	context = canvas.getContext("2d");
@@ -46,6 +49,7 @@ function Start() {
 	lives = 5;
 	BallsAte = 0;
 	loseGame = false;
+	playMusic = false;
 	pac_color = "red";
 	keys = gameKeys;
 	food_remain = numOfBall;
@@ -111,6 +115,7 @@ function Start() {
 		var imglives=document.getElementById("lblLifes");
 		imglives.appendChild(img);
 	}
+
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -204,7 +209,6 @@ function Draw() {
 	lblTime.value = limitTime;
 	//lblTime.value = time_elapsed;
 	//lblLifes.value = lifes;
-	
 	showSettings();
 	for (var i = 0; i < 23; i++) {
 		for (var j = 0; j < 17; j++) {
@@ -429,6 +433,7 @@ function monsterHitPacmen() {
 	}
 	else {
 		loseGame = true;
+		startMusic.pause();
 		gameOver()
 	}
 }
@@ -504,8 +509,15 @@ function UpdatePosition() {
 	board[shape.i][shape.j] = 2;
 	if (BallsAte == numOfBall) {
 		gameOver();
+		startMusic.pause();
+		playMusic = false;
 	} else {
 		Draw();
+	}
+	if(!playMusic){
+		startMusic = new Audio('startGame.mp3');
+		startMusic.play();
+		playMusic=true;
 	}
 }
 
@@ -531,12 +543,15 @@ function startTimer() {
 	}
 }
 function gameOver() {
+	startMusic.pause();
+	playMusic = false;
 	window.clearInterval(interval);
 	window.clearInterval(timeInterval);
 	window.clearInterval(gameInterval);
 	var message;
 	if (loseGame) {
 		message = "Loser!";
+		music  = new Audio('gameOver.mp3');
 	}
 	else if (score < 100) {
 		message = "You are better than " + score+ " points!";
@@ -544,11 +559,13 @@ function gameOver() {
 	else {
 		message = "Winner!!!";
 	}
+	music.play();
 	clearAll();
 	alert(message);
 }
 
 function newGame() {
+	music.pause();
 	monsters = startMonsters;
 	limitTime = timeOfGame;
 	keys = gameKeys;

@@ -120,8 +120,15 @@ footer
     .welcome_user{
     font-size: 30px;
     }
+<<<<<<< HEAD
 
    /* .col-sm-4{
+=======
+.modal-body{
+  text-align: left;
+}
+    .col-sm-4{
+>>>>>>> a6adf786f95dea7ec1b9925813063f8d188f3205
       color: black;
         padding-bottom: 16px;
    }*/

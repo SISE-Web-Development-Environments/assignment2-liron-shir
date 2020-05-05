@@ -190,7 +190,7 @@
 
 			<div id="setting_board" class="setting_board">
 
-				<div class="row" id="score">
+				<!--<div class="row" id="score">
 					<label for="lblScore" class="col-sm-4">SCORE:</label>
 					<input id="lblScore" type="text" size="10" class="without" class="col-sm-4" />
 				</div>
@@ -201,7 +201,7 @@
 				<div class="row" id="lifes">
 					<label for="lblLifes" class="col-sm-4">LIFES:</label>
 					<input id="lblLifes" value="" type="text" size="10" class="without" class="col-sm-4" />
-				</div>
+				</div>-->
 				<p class="welcome_user"><u>Setting :</u></p>
 				<div class="row" id="upSetting">
 					<label for="lblUp" class="col-sm-4">UP:</label>
@@ -248,7 +248,16 @@
 			<br>
 		</div>
 		<div id="game">
-			<canvas id="canvas" height="590" width="800" style="width:50%;"></canvas>
+			<p><label for="lblScore" >SCORE:</label>
+			<input id="lblScore" type="text" size="5" class="without" class="col-sm-3" />
+			<label for="lblTime" >TIME:</label>
+			<input id="lblTime" type="text" size="5" class="without" class="col-sm-3" />
+			<label for="lblLifes" >LIVES:</label>
+			<!--<input id="lblLifes" value="" type="text" size="5" class="without" class="col-sm-3"/></p>-->
+			<div id="lblLifes"class="col-sm-3"> </div></p>
+			<canvas id="canvas" height="590" width="800" style="width:50%;">
+			
+			</canvas>
 		</div>
 	</div>
 	<br />

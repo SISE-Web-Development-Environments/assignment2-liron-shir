@@ -106,6 +106,18 @@ function Start() {
 
 	}
 
+	//drugs
+	var img=document.createElement("img");
+	img.src="./images/drug.png";
+	img.setAttribute("height", "30");
+	img.setAttribute("width", "30");
+	var lives=document.getElementById("lblLifes");
+	lives.appendChild(img);
+	lives.appendChild(img);
+	lives.appendChild(img);
+	lives.appendChild(img);
+	lives.appendChild(img);
+
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -125,6 +137,8 @@ function Start() {
 	//intervalTime =  setTimeout(startTimer, 1000);
 	timeInterval = setInterval(startTimer, 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
+
+
 }
 
 function initPacmen() {
@@ -196,7 +210,8 @@ function Draw() {
 	lblScore.value = score;
 	lblTime.value = limitTime;
 	//lblTime.value = time_elapsed;
-	lblLifes.value = lifes;
+	//lblLifes.value = lifes;
+	
 	showSettings();
 	for (var i = 0; i < 23; i++) {
 		for (var j = 0; j < 17; j++) {
@@ -411,9 +426,12 @@ function DrawMonsters() {
 function monsterHitPacmen() {
 	if (lifes > 1) {
 		lifes--;
-		lblLifes.value = lifes;
+		//lblLifes.value = lifes;
+		var drugs = document.getElementById("lblLifes");
+         drugs.removeChild(drugs.lastChild);
 		score = score - 10;
 		lblScore.value = score
+
 		initGameAfterHit();
 	}
 	else {
@@ -483,6 +501,12 @@ function UpdatePosition() {
 	}
 	else if(board[shape.i][shape.j] == 10){
 		lifes++;
+		var img = document.createElement("img");
+		img.src = "./images/drug.png";
+		img.setAttribute("height", "30");
+		img.setAttribute("width", "30");
+		var lives = document.getElementById("lblLifes");
+		lives.appendChild(img);
 	}
 	board[shape.i][shape.j] = 2;
 	/*var currentTime = new Date();

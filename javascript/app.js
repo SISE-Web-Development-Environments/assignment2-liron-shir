@@ -2,8 +2,6 @@ var context;
 var shape = new Object();
 var score;
 var pac_color;
-//var start_time;
-//var time_elapsed;
 var interval;
 var timeInterval;
 var mouth_pacman;
@@ -13,6 +11,7 @@ var startMonsters = [{ x: 1, y: 1, img: "./images/pink.ico", xPrev: 1, yPrev: 1 
 var board;
 var numOfBall;
 var gameKeys = [];
+var keys =[];
 var colorBalls = ["#F996B8", "#CE96F9", "#87F7F5"];
 var timeOfGame;
 var limitTime;
@@ -48,10 +47,7 @@ function Start() {
 	BallsAte = 0;
 	loseGame = false;
 	pac_color = "red";
-	//var cnt = 100; //%
-	//var pacman_remain = 1;//init pacman
-	//start_time = new Date();
-	//start_time.setSeconds(timeOfGame)
+	keys = gameKeys;
 	food_remain = numOfBall;
 	limitTime = timeOfGame;
 	ball5 = 0.6 * food_remain;
@@ -177,16 +173,16 @@ window.addEventListener("keydown", function (e) {
 }, false);
 
 function GetKeyPressed() {
-	if (keysDown[gameKeys[0]]) {
+	if (keysDown[keys[0]]) {
 		return 1;
 	}
-	if (keysDown[gameKeys[1]]) {
+	if (keysDown[keys[1]]) {
 		return 2;
 	}
-	if (keysDown[gameKeys[2]]) {
+	if (keysDown[keys[2]]) {
 		return 3;
 	}
-	if (keysDown[gameKeys[3]]) {
+	if (keysDown[keys[3]]) {
 		return 4;
 	}
 }
@@ -485,17 +481,7 @@ function UpdatePosition() {
 		lifes++;
 	}
 	board[shape.i][shape.j] = 2;
-	/*var currentTime = new Date();
-	time_elapsed = (start_time - currentTime.getSeconds) / 1000;
-	if (time_elapsed <= 0)
-		gameOver();
-
-	if (score >= 20 && time_elapsed <= 10) {
-		pac_color = "green";
-	}*/
 	if (BallsAte == numOfBall) {
-		//window.clearInterval(interval);
-		//window.alert("Game completed");
 		gameOver();
 	} else {
 		Draw();
@@ -519,7 +505,6 @@ function showSettings() {
 /*timer of game*/
 function startTimer() {
 	limitTime--;
-	//lblTime.value = limitTime;
 	if (limitTime == 0) {
 		gameOver();
 	}
@@ -530,16 +515,27 @@ function gameOver() {
 	window.clearInterval(gameInterval);
 	var message;
 	if (loseGame) {
-	//	message = "Loser!";
+		message = "Loser!";
 	}
-	else if (score.value < 100) {
-		message = "You are better than " + score + "points!";
+	else if (score < 100) {
+		message = "You are better than " + score+ " points!";
 	}
 	else {
 		message = "Winner!!!";
 	}
-	//alert(message);
+	clearAll();
+	alert(message);
 }
+
 function newGame() {
+	monsters = startMonsters;
+	limitTime = timeOfGame;
+	keys = gameKeys;
 	Start();
+}
+
+function clearAll(){
+	monsters = undefined;
+	limitTime = undefined;
+	keys = undefined;
 }

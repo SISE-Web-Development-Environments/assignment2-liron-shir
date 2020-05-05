@@ -120,7 +120,9 @@ footer
     .welcome_user{
     font-size: 30px;
     }
-
+.modal-body{
+  text-align: left;
+}
     .col-sm-4{
       color: black;
         padding-bottom: 16px;

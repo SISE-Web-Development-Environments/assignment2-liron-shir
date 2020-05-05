@@ -18,16 +18,20 @@ $().ready(function () {
     $("#setting").validate({
         rules: {
             up: {
-                required: true
+                required: true,
+                checkKey1: true
             },
             down: {
-                required: true
-            },
-            right: {
-                required: true
+                required: true,
+                checkKey2: true
             },
             left: {
-                required: true
+                required: true,
+                checkKey3: true
+            },
+            right: {
+                required: true,
+                checkKey4: true
             },
             fiveBall: {
                 checkColor1: true
@@ -41,16 +45,20 @@ $().ready(function () {
         },
         messages: {
             up: {
-                required: "Please enter up move key"
+                required: "Please enter up move key", 
+                checkKey1: "Each key should be different"
             },
             down: {
-                required: "Please enter down move key"
-            },
-            right: {
-                required: "Please enter right move key"
+                required: "Please enter down move key",
+                checkKey2: "Each key should be different"
             },
             left: {
-                required: "Please enter left move key"
+                required: "Please enter left move key",
+                checkKey3: "Each key should be different"
+            },
+            right: {
+                required: "Please enter right move key",
+                checkKey4: "Each key should be different"
             },
             fiveBall: {
                 checkColor1: "Each ball should have a different color"
@@ -113,6 +121,35 @@ jQuery.validator.addMethod("checkColor3", function (value, element) {
     color2 = $("#fifteenBall").val();
     color3 = $("#twentyFiveBall").val();
     return !(color1 == color3 || color2 == color3);
+});
+
+jQuery.validator.addMethod("checkKey1", function (value, element) {
+    key1 = $("#up").val();
+    key2 = $("#down").val();
+    key3 = $("#left").val();
+    key4 = $("#right").val();
+    return !(key1==key2 || key1==key3 || key1==key4);
+});
+jQuery.validator.addMethod("checkKey2", function (value, element) {
+    key1 = $("#up").val();
+    key2 = $("#down").val();
+    key3 = $("#left").val();
+    key4 = $("#right").val();
+    return !(key2==key3 || key2==key4 || key2==key1);
+});
+jQuery.validator.addMethod("checkKey3", function (value, element) {
+    key1 = $("#up").val();
+    key2 = $("#down").val();
+    key3 = $("#left").val();
+    key4 = $("#right").val();
+    return !(key3==key4 || key3==key1 || key3==key2);
+});
+jQuery.validator.addMethod("checkKey4", function (value, element) {
+    key1 = $("#up").val();
+    key2 = $("#down").val();
+    key3 = $("#left").val();
+    key4 = $("#right").val();
+    return !(key4==key1 || key4==key2 || key4==key3);
 });
 
 /*random settings by buttom*/

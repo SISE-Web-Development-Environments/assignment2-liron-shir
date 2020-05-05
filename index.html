@@ -19,7 +19,7 @@
 
 <body>
 	<header width:25%;>
-		<p><img src="images/pac2.png" width="400px"></p>
+		<p><img src="images/p.png" width="350px"></p>
 		<p><b> Shir Ben-Dor 204675797 | Liron Ben-Yakov 204385884 </b></p>
 		<!---	<p><img src="images/pac1.png" width="50px"><img src="images/pac3.png" width="50px"></p>-->
 		<p></p>
@@ -31,7 +31,6 @@
 		<li><a type="button" data-toggle="modal" data-target="#aboutDiv">ABOUT</a></li>
 	</div>
 	<br>
-	<!--	<button onclick="game()" type="submit">play game</button>-->
 
 	<div id="content">
 
@@ -199,18 +198,7 @@
 
 			<div id="setting_board" class="setting_board">
 
-				<!--<div class="row" id="score">
-					<label for="lblScore" class="col-sm-4">SCORE:</label>
-					<input id="lblScore" type="text" size="10" class="without" class="col-sm-4" />
-				</div>
-				<div class="row" id="time">
-					<label for="lblTime" class="col-sm-4">TIME:</label>
-					<input id="lblTime" type="text" size="10" class="without" class="col-sm-4" />
-				</div>
-				<div class="row" id="lifes">
-					<label for="lblLifes" class="col-sm-4">LIFES:</label>
-					<input id="lblLifes" value="" type="text" size="10" class="without" class="col-sm-4" />
-				</div>-->
+			
 				<p class="welcome_user"><u>Setting :</u></p>
 				<div class="row" id="upSetting">
 					<label for="lblUp" class="col-sm-4">UP:</label>
@@ -257,14 +245,15 @@
 			<br>
 		</div>
 		<div id="game">
-			<p><div id="lblLifes" class="col-sm-3"> </div></p>
-				<label for="lblScore" >SCORE:</label>
-			<input id="lblScore" type="text" size="5" class="without" class="col-sm-3" />
-			<label for="lblTime" >TIME:</label>
-			<input id="lblTime" type="text" size="5" class="without" class="col-sm-3" />
-			<label for="lblLifes" >LIVES:</label>
+			<p>
+				<label for="lblScore">SCORE:</label>
+				<input id="lblScore" type="text" size="5" class="without1" />
+				<label for="lblTime">TIME:</label>
+				<input id="lblTime" type="text" size="5" class="without1" />
+				<label for="lblLifes">LIVES:</label>
+				<label id="lblLifes"> </label>
+			</p>
 			<!--<input id="lblLifes" value="" type="text" size="5" class="without" class="col-sm-3"/></p>-->
-			<div id="lblLifes" class="col-sm-3"> </div></p>
 			<canvas id="canvas" height="590" width="800" style="width:50%;">
 			
 			</canvas>

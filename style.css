@@ -146,6 +146,12 @@ input[type="text"].without{
     /*size: 10%;*/
     font-size: 13px;
   }
+  input[type="text"].without1{
+    background: transparent;
+    border: none;
+    /*size: 10%;*/
+    font-size:30px;
+  }
 #canvas{
       background-color: #e0d5eb;
       border:2px solid white;

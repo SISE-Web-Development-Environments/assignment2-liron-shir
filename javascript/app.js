@@ -21,7 +21,7 @@ var ball15;
 var ball25;
 var loseGame;
 var BallsAte;
-var lifes;
+var lives;
 var gameInterval;
 var pizza = { x: 21, y: 1, img: "./images/piz.png", xPrev: 21, yPrev: 1, active: true };
 
@@ -43,7 +43,7 @@ function Start() {
 	game();
 	board = new Array();
 	score = 0;
-	lifes = 5;
+	lives = 5;
 	BallsAte = 0;
 	loseGame = false;
 	pac_color = "red";
@@ -103,17 +103,15 @@ function Start() {
 	}
 
 	//drugs
-	var img=document.createElement("img");
-	img.src="./images/drug.png";
-	img.setAttribute("height", "30");
-	img.setAttribute("width", "30");
-	var lives=document.getElementById("lblLifes");
-	lives.appendChild(img);
-	lives.appendChild(img);
-	lives.appendChild(img);
-	lives.appendChild(img);
-	lives.appendChild(img);
-
+	for(var i=0;i<lives;i++){
+		var img=document.createElement("img");
+		img.src="./images/drug.png";
+		img.setAttribute("height", "30");
+		img.setAttribute("width", "30");
+		var imglives=document.getElementById("lblLifes");
+		
+		imglives.appendChild(img);
+	}
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -420,8 +418,8 @@ function DrawMonsters() {
 
 
 function monsterHitPacmen() {
-	if (lifes > 1) {
-		lifes--;
+	if (lives > 1) {
+		lives--;
 		//lblLifes.value = lifes;
 		var drugs = document.getElementById("lblLifes");
          drugs.removeChild(drugs.lastChild);
@@ -496,7 +494,7 @@ function UpdatePosition() {
 		limitTime = limitTime + 60;
 	}
 	else if(board[shape.i][shape.j] == 10){
-		lifes++;
+		lives++;
 		var img = document.createElement("img");
 		img.src = "./images/drug.png";
 		img.setAttribute("height", "30");
@@ -562,4 +560,5 @@ function clearAll(){
 	monsters = undefined;
 	limitTime = undefined;
 	keys = undefined;
+	
 }

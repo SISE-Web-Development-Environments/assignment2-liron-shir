@@ -80,6 +80,7 @@
 								class="col-sm-4">
 						</div>
 					</div>
+					<br>
 					<p>
 						<button class="submit" type="submit" value="Submit">SUBMIT</button>
 					</p>
@@ -129,8 +130,8 @@
 				<div class="center">
 					<div class="row">
 						<label for="upKey" class="col-sm-4">Up key:</label>
-						<input type="text" size="20" id="up" name="up" placeholder="Select up key"
-							autocomplete="off" class="col-sm-4">
+						<input type="text" size="20" id="up" name="up" placeholder="Select up key" autocomplete="off"
+							class="col-sm-4">
 					</div>
 					<div class="row">
 						<label for="downKey" class="col-sm-4">Down key:</label>
@@ -148,18 +149,17 @@
 							autocomplete="off" class="col-sm-4">
 					</div>
 					<div class="row">
-						<label class="col-sm-4">Number of balls:
-							<div class="slidecontainer">
-								<input class="col-sm-4" type="range" id="numberOfBalls" min="50" max="90" value="50" class="slider"
-									oninput="myFunction(this.value)"></div><span id="BallsNumber"></span></label>
+						<label class="col-sm-4">Number of balls:</label>
+						<!--<div class="slidecontainer" class="col-sm-4"><span class="col-sm-4" id="BallsNumber"></span></div>-->
+						<input type="number" id="numberOfBalls" min="50" max="90" value="50" class="col-sm-4">
 					</div>
 					<div class="row">
 						<label class="col-sm-4">Ball of 5 point:</label>
 						<input type="color" id="fiveBall" name="fiveBall" value="#F996B8" class="col-sm-4">
 					</div>
 					<div class="row">
-					<label class="col-sm-4">Ball of 15 point:</label>
-					<input type="color" id="fifteenBall" name="fifteenBall" value="#CE96F9" class="col-sm-4">
+						<label class="col-sm-4">Ball of 15 point:</label>
+						<input type="color" id="fifteenBall" name="fifteenBall" value="#CE96F9" class="col-sm-4">
 					</div>
 					<div class="row">
 						<label class="col-sm-4">Ball of 25 point:</label>
@@ -167,13 +167,16 @@
 					</div>
 					<div class="row">
 						<label class="col-sm-4">Game time:</label>
-						<input type="number" id="timeOfGame" min="60" value="60" placeholder="Minimum 60 seconds" class="col-sm-4">
+						<input type="number" id="timeOfGame" min="60" value="60" placeholder="Minimum 60 seconds"
+							class="col-sm-4">
 					</div>
 					<div class="row">
 						<label class="col-sm-4">Number of monsters:</label>
-						<input type="number" id="numberOfMonsters" min="1" max="4" value="1" placeholder="1" class="col-sm-4">
+						<input type="number" id="numberOfMonsters" min="1" max="4" value="1" placeholder="1"
+							class="col-sm-4">
 					</div>
 				</div>
+				<br>
 				<button onclick="randomSettings()">Random</button>
 				<button class="submit" type="submit" value="Submit">play game</button>
 			</fieldset>

@@ -27,7 +27,7 @@ var pizza = { x: 21, y: 1, img: "./images/piz.png", xPrev: 21, yPrev: 1, active:
 
 $(document).ready(function () {
 	context = canvas.getContext("2d");
-	Start();
+	//Start();
 });
 
 function game() {
@@ -109,7 +109,6 @@ function Start() {
 		img.setAttribute("height", "30");
 		img.setAttribute("width", "30");
 		var imglives=document.getElementById("lblLifes");
-		
 		imglives.appendChild(img);
 	}
 	keysDown = {};
@@ -553,6 +552,10 @@ function newGame() {
 	monsters = startMonsters;
 	limitTime = timeOfGame;
 	keys = gameKeys;
+	for(var i=0;i<lives;i++){
+		var drugs = document.getElementById("lblLifes");
+         drugs.removeChild(drugs.lastChild);
+	}
 	Start();
 }
 
@@ -560,5 +563,6 @@ function clearAll(){
 	monsters = undefined;
 	limitTime = undefined;
 	keys = undefined;
+	
 	
 }

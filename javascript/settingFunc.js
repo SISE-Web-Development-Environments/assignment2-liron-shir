@@ -77,7 +77,7 @@ $().ready(function () {
             numOfBall = $("#numberOfBalls").val();
             timeOfGame = $("#timeOfGame").val();
             numOfMonsters = $("#numberOfMonsters").val();
-            Start();
+            //newGame();
         }
     });
 });

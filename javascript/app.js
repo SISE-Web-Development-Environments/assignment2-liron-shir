@@ -207,8 +207,6 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = limitTime;
-	//lblTime.value = time_elapsed;
-	//lblLifes.value = lifes;
 	showSettings();
 	for (var i = 0; i < 23; i++) {
 		for (var j = 0; j < 17; j++) {
@@ -218,56 +216,61 @@ function Draw() {
 			if (board[i][j] == 2) {//pacman
 				if (mouth_pacman == 2) { //down
 					context.beginPath();
-					context.arc(center.x, center.y, 10, 0.65 * Math.PI, 0.35 * Math.PI); // half circle
+					context.arc(center.x, center.y, 15, 0.65 * Math.PI, 0.35 * Math.PI); // half circle
+					context.stroke();
 					context.lineTo(center.x, center.y);
 					context.fillStyle = pac_color; //color 
 					context.fill();
 					context.beginPath();
-					context.arc(center.x + 4, center.y + 2.6, 1.5, 0, 2 * Math.PI); // circle
+					context.arc(center.x + 6, center.y + 4, 2.5, 0, 2 * Math.PI); // circle
 					context.fillStyle = "black"; //color 
 					context.fill();
 				}
 				else if (mouth_pacman == 3) { //left
 					context.beginPath();
-					context.arc(center.x, center.y, 10, 1.15 * Math.PI, 0.85 * Math.PI); // half circle
+					context.arc(center.x, center.y, 15, 1.15 * Math.PI, 0.85 * Math.PI); // half circle
+					context.stroke();
 					context.lineTo(center.x, center.y);
 					context.fillStyle = pac_color; //color 
 					context.fill();
 					context.beginPath();
-					context.arc(center.x - 1.5, center.y - 5, 1.5, 0, 2 * Math.PI); // circle
+					context.arc(center.x - 2, center.y - 7, 2.5, 0, 2 * Math.PI); // circle
 					context.fillStyle = "black"; //color 
 					context.fill();
 				}
 				else if (mouth_pacman == 1) {//up
 					context.beginPath();
-					context.arc(center.x, center.y, 10, 1.65 * Math.PI, 1.35 * Math.PI); // half circle
+					context.arc(center.x, center.y, 15, 1.65 * Math.PI, 1.35 * Math.PI); // half circle
+					context.stroke();
 					context.lineTo(center.x, center.y);
 					context.fillStyle = pac_color; //color 
 					context.fill();
 					context.beginPath();
-					context.arc(center.x + 4, center.y - 2.6, 1.5, 0, 2 * Math.PI); // circle
+					context.arc(center.x + 6, center.y - 4, 2.5, 0, 2 * Math.PI); // circle
 					context.fillStyle = "black"; //color 
 					context.fill();
 				}
 				else if (mouth_pacman == 4) {//right
 					context.beginPath();
-					context.arc(center.x, center.y, 10, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+					context.arc(center.x, center.y, 15, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+					context.stroke();
 					context.lineTo(center.x, center.y);
 					context.fillStyle = pac_color; //color
 					context.fill();
 					context.beginPath();
-					context.arc(center.x + 1.5, center.y - 5, 1.5, 0, 2 * Math.PI); // circle
+					context.arc(center.x + 2, center.y -7, 2.5, 0, 2 * Math.PI); // circle
 					context.fillStyle = "black"; //color
 					context.fill();
 				}
 				else {
 					context.beginPath();
-					context.arc(center.x, center.y, 10, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+					context.arc(center.x, center.y, 15, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+					context.stroke();
 					context.lineTo(center.x, center.y);
 					context.fillStyle = pac_color; //color
 					context.fill();
 					context.beginPath();
-					context.arc(center.x + 1.5, center.y - 5, 1.5, 0, 2 * Math.PI); // circle
+					context.arc(center.x + 2, center.y -7, 2.5, 0, 2 * Math.PI); // circle
 					context.fillStyle = "black"; //color
 					context.fill();
 				}
@@ -276,27 +279,30 @@ function Draw() {
 				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = colorBalls[0]; //color
 				context.fill();
+				context.stroke();
+
 			}
 			else if (board[i][j] == 15) {//food- 15ball
 				context.beginPath();
 				context.arc(center.x, center.y, 7, 0, 2 * Math.PI); // circle
 				context.fillStyle = colorBalls[1]; //color
 				context.fill();
+				context.stroke();
+
 			}
 			else if (board[i][j] == 25) {//food- 25ball
 				context.beginPath();
 				context.arc(center.x, center.y, 9, 0, 2 * Math.PI); // circle
 				context.fillStyle = colorBalls[2]; //color
 				context.fill();
+				context.stroke();
+
 			}
 			else if (board[i][j] == 4) {//walls
 				var wall = new Image();
 				wall.src = "./images/wall.png";
 				context.drawImage(wall, center.x - 20, center.y - 20, 35, 35);
-				/*context.beginPath();
-				context.rect(center.x - 20, center.y - 20, 30, 30);
-				context.fillStyle = "grey"; //color
-				context.fill();*/
+				
 			}
 			else if(board[i][j] == 9){//clock
 				var clock = new Image();

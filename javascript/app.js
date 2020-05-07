@@ -562,7 +562,6 @@ function gameOver() {
 	music.play();
 	alert(message);
 	clearAll();
-
 }
 
 function newGame() {

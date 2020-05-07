@@ -508,13 +508,8 @@ function UpdatePosition() {
 		img.src = "./images/drug.png";
 		img.setAttribute("height", "30");
 		img.setAttribute("width", "30");
-<<<<<<< HEAD
-		var lives = document.getElementById("lblLives");
-		lives.appendChild(img);
-=======
 		var livesImg = document.getElementById("lblLives");
 		livesImg.appendChild(img);
->>>>>>> 02791abf8360cd50b33d31c7ac739225db976d2a
 	}
 	board[shape.i][shape.j] = 2;
 	if (BallsAte == numOfBall) {
@@ -571,11 +566,7 @@ function gameOver() {
 
 function newGame() {
 	if(!playMusic){
-<<<<<<< HEAD
-		startMusic = new Audio('startGame.mp3');
-=======
 		startMusic = new Audio('./music/startGame.mp3');
->>>>>>> 02791abf8360cd50b33d31c7ac739225db976d2a
 		startMusic.play();
 		playMusic=true;
 	}

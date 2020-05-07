@@ -77,7 +77,8 @@ $().ready(function () {
             numOfBall = $("#numberOfBalls").val();
             timeOfGame = $("#timeOfGame").val();
             numOfMonsters = $("#numberOfMonsters").val();
-            //newGame();
+            newGame();
+            //initSetting(setting)
         }
     });
 });
@@ -165,16 +166,9 @@ function randomSettings(){
     $("#fiveBall")[0].value=getRandomColor();
     $("#fifteenBall")[0].value=getRandomColor();
     $("#twentyFiveBall")[0].value=getRandomColor();
-    colorBalls[0] = $("#fiveBall")[0].value;
-    colorBalls[1] = $("#fifteenBall")[0].value;
-    colorBalls[2] = $("#twentyFiveBall")[0].value;
     $("#numberOfBalls")[0].value=randomNumberOfBalls();
-    numOfBall = $("#numberOfBalls").val();
     $("#timeOfGame")[0].value = 60 + Math.floor((Math.random() * 100));
-    timeOfGame = $("#timeOfGame").val();
     $("#numberOfMonsters")[0].value=  randonNumberOfMonsters();
-    numOfMonsters = $("#numberOfMonsters").val();
-    Start();
 }
 
 function randomNumberOfBalls(){
@@ -202,6 +196,11 @@ function getRandomColor() {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
+  }
+
+  function initSetting(){
+
+    
   }
 
 

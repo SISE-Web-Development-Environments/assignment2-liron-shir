@@ -21,6 +21,7 @@ function welcome() {
   $("#registerDiv").hide();
   $("#settingDiv").hide();
   $("#canvesDiv").hide();
+  stopGame();
 
 }
 
@@ -30,6 +31,7 @@ function login() {
   $("#registerDiv").hide();
   $("#settingDiv").hide();
   $("#canvesDiv").hide();
+  stopGame();
 }
 
 function register() {
@@ -38,6 +40,7 @@ function register() {
   $("#registerDiv").show();
   $("#settingDiv").hide();
   $("#canvesDiv").hide();
+  stopGame();
 }
 
 function setting() {

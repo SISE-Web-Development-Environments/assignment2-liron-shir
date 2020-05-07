@@ -24,7 +24,7 @@ var BallsAte;
 var lives;
 var gameInterval;
 var pizza = { x: 21, y: 1, img: "./images/piz.png", xPrev: 21, yPrev: 1, active: true };
-var playMusic;
+var playMusic= false;
 var startMusic;
 var music;
 
@@ -49,7 +49,6 @@ function Start() {
 	lives = 5;
 	BallsAte = 0;
 	loseGame = false;
-	playMusic = false;
 	pac_color = "red";
 	keys = gameKeys;
 	food_remain = numOfBall;
@@ -112,7 +111,7 @@ function Start() {
 		img.src="./images/drug.png";
 		img.setAttribute("height", "30");
 		img.setAttribute("width", "30");
-		var imglives=document.getElementById("lblLifes");
+		var imglives=document.getElementById("lblLives");
 		imglives.appendChild(img);
 	}
 
@@ -131,7 +130,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 250);
+	interval = setInterval(UpdatePosition, 100);
 	//intervalTime =  setTimeout(startTimer, 1000);
 	timeInterval = setInterval(startTimer, 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
@@ -291,7 +290,7 @@ function Draw() {
 			}
 			else if (board[i][j] == 4) {//walls
 				var wall = new Image();
-				wall.src = "./images/wall3.jpg";
+				wall.src = "./images/wall.png";
 				context.drawImage(wall, center.x - 20, center.y - 20, 35, 35);
 				/*context.beginPath();
 				context.rect(center.x - 20, center.y - 20, 30, 30);
@@ -413,19 +412,25 @@ function DrawMonsters() {
 		context.drawImage(monster_img, center.x - 20, center.y - 20, 30, 30);
 		if (monster.x == shape.i && monster.y == shape.j) {
 			monsterHitPacmen();
-
 		}
 	}
 }
 
-
+function pacmanMeetMonster(){
+	for(var i=0; i<numOfMonsters; i++){
+		if (monster.x == shape.i && monster.y == shape.j) {
+			monsterHitPacmen();
+		}
+	}
+}
 
 function monsterHitPacmen() {
+	var drugs = document.getElementById("lblLives");
+         drugs.removeChild(drugs.lastChild);
 	if (lives > 1) {
 		lives--;
 		//lblLifes.value = lifes;
-		var drugs = document.getElementById("lblLifes");
-         drugs.removeChild(drugs.lastChild);
+		
 		score = score - 10;
 		lblScore.value = score
 
@@ -433,9 +438,10 @@ function monsterHitPacmen() {
 	}
 	else {
 		loseGame = true;
-		startMusic.pause();
-		gameOver()
+		//startMusic.pause();
+		gameOver();
 	}
+	
 }
 
 function initGameAfterHit() {
@@ -503,21 +509,16 @@ function UpdatePosition() {
 		img.src = "./images/drug.png";
 		img.setAttribute("height", "30");
 		img.setAttribute("width", "30");
-		var lives = document.getElementById("lblLifes");
+		var lives = document.getElementById("lblLives");
 		lives.appendChild(img);
 	}
 	board[shape.i][shape.j] = 2;
 	if (BallsAte == numOfBall) {
 		gameOver();
-		startMusic.pause();
-		playMusic = false;
+		//startMusic.pause();
+		//playMusic = false;
 	} else {
 		Draw();
-	}
-	if(!playMusic){
-		startMusic = new Audio('startGame.mp3');
-		startMusic.play();
-		playMusic=true;
 	}
 }
 
@@ -559,18 +560,22 @@ function gameOver() {
 	else {
 		message = "Winner!!!";
 	}
-	music.play();
+	//music.play();
 	clearAll();
 	alert(message);
 }
 
 function newGame() {
-	music.pause();
+	if(!playMusic){
+		startMusic = new Audio('startGame.mp3');
+		startMusic.play();
+		playMusic=true;
+	}
 	monsters = startMonsters;
 	limitTime = timeOfGame;
 	keys = gameKeys;
 	for(var i=0;i<lives;i++){
-		var drugs = document.getElementById("lblLifes");
+		var drugs = document.getElementById("lblLives");
          drugs.removeChild(drugs.lastChild);
 	}
 	Start();
@@ -580,6 +585,12 @@ function clearAll(){
 	monsters = undefined;
 	limitTime = undefined;
 	keys = undefined;
-	
-	
+}
+
+function stopGame(){
+	clearAll();
+	if(playMusic){
+	  startMusic.pause();
+	  playMusic = false;
+	}
 }

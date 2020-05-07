@@ -126,13 +126,10 @@ footer
 }
     .col-sm-4{
       color: black;
-        padding-bottom: 16px;
-   }
-   .col-sm-4{
-        color: black;
-        font-size: 13px;
-        padding-bottom: 2px;
-        padding-left: 18px;
+      font-size: 12px;
+      padding-bottom: 5px;
+      padding-left: 18px;
+      padding-right: 50px;
    }
 
  .col-sm-3{

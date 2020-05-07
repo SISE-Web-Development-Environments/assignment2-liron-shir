@@ -25,8 +25,9 @@ var lives;
 var gameInterval;
 var pizza = { x: 21, y: 1, img: "./images/piz.png", xPrev: 21, yPrev: 1, active: true };
 var playMusic= false;
-var startMusic;
-var music;
+var startMusic = new Audio('./music/startGame.mp3');
+var musicGameOver  = new Audio('./music/gameOver.mp3');
+var musicWin = new Audio('./music/winner.mp3');
 var timeOut;
 
 $(document).ready(function () {
@@ -307,7 +308,7 @@ function Draw() {
 			else if(board[i][j] == 9){//clock
 				var clock = new Image();
 				clock.src ="./images/clock.png";
-				context.drawImage(clock, center.x - 20, center.y - 20, 30, 30);
+				context.drawImage(clock, center.x - 18, center.y - 18, 30, 30);
 			}
 			else if(board[i][j] == 10){//drug
 				var drug = new Image();
@@ -316,11 +317,8 @@ function Draw() {
 			}
 		}
 	}
-	//movingMonsters();
 	DrawMonsters();
-	//movingPizza();
 	DrawPizza();
-	pacmanMeetMonster();
 }
 
 function DrawPizza() {
@@ -426,6 +424,7 @@ function DrawMonsters() {
 
 function pacmanMeetMonster(){
 	for(var i=0; i<numOfMonsters; i++){
+		var monster = monsters[i];
 		if (monster.x == shape.i && monster.y == shape.j) {
 			monsterHitPacmen();
 		}
@@ -520,6 +519,8 @@ function UpdatePosition() {
 		livesImg.appendChild(img);
 	}
 	board[shape.i][shape.j] = 2;
+	pacmanMeetMonster();
+
 	if (BallsAte == numOfBall) {
 		gameOver();
 	} else {
@@ -555,31 +556,43 @@ function gameOver() {
 	var message;
 	if (loseGame) {
 		message = "Loser!";
-		music  = new Audio('./music/gameOver.mp3');
+		//musicGameOver = new Audio('./music/gameOver.mp3');
+
+		musicGameOver.play();
 	}
 	else if (timeOut && score < 100) {
-		message = "You are better than " + score+ " points!";
-		music  = new Audio('./music/gameOver.mp3');
+		message = "You are better than " + score + " points!";
+		musicGameOver.play();
 	}
-	else if(timeOut){
+	else if (timeOut) {
 		message = "Winner!!!";
-		music = new Audio('./music/winner.mp3');
+		//musicWin=new Audio('./music/winner.mp3');
+		
+		musicWin.play();
 	}
-	music.play();
+	
+
 	alert(message);
 	clearAll();
 }
 
 function newGame() {
 	clearAll();
+	if(loseGame || score<100)
+	  musicGameOver.pause();
 	if(!playMusic){
 		startMusic = new Audio('./music/startGame.mp3');
 		startMusic.play();
 		playMusic=true;
 	}
+
 	initMonsters();
 	limitTime = timeOfGame;
 	keys = gameKeys;
+	for(var i=0;i<lives;i++){
+		var drugs = document.getElementById("lblLives");
+         drugs.removeChild(drugs.lastChild);
+	}
 	Start();
 }
 
@@ -587,16 +600,15 @@ function clearAll(){
 	window.clearInterval(interval);
 	window.clearInterval(timeInterval);
 	window.clearInterval(gameInterval);
-	limitTime = undefined;
+	limitTime = 0;
 	keys = undefined;
-	for(var i=0;i<lives;i++){
-		var drugs = document.getElementById("lblLives");
-         drugs.removeChild(drugs.lastChild);
-	}
+	
 }
 
 function stopGame(){
 	clearAll();
+	if(loseGame || score<100)
+	  musicGameOver.pause();
 	if(playMusic){
 	  startMusic.pause();
 	  playMusic = false;

@@ -197,4 +197,9 @@ function getRandomColor() {
     return color;
   }
 
+  function initSetting(){
+
+    
+  }
+
 

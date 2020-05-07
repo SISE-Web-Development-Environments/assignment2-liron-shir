@@ -171,7 +171,7 @@ function randomSettings(){
 }
 
 function randomNumberOfBalls(){
-    var numBalls = '5678';
+    var numBalls = '56789';
     var ballsNumber= '';
     for (var i = 0; i < 2; i++) {
         ballsNumber += numBalls[Math.floor(Math.random() * 5)];

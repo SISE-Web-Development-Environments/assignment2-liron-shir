@@ -78,7 +78,10 @@ $().ready(function () {
             timeOfGame = $("#timeOfGame").val();
             numOfMonsters = $("#numberOfMonsters").val();
             newGame();
+<<<<<<< HEAD
             //initSetting(setting)
+=======
+>>>>>>> 02791abf8360cd50b33d31c7ac739225db976d2a
         }
     });
 });

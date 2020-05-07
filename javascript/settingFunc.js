@@ -78,7 +78,6 @@ $().ready(function () {
             timeOfGame = $("#timeOfGame").val();
             numOfMonsters = $("#numberOfMonsters").val();
             newGame();
-            //initSetting(setting)
         }
     });
 });
@@ -196,11 +195,6 @@ function getRandomColor() {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-  }
-
-  function initSetting(){
-
-    
   }
 
 

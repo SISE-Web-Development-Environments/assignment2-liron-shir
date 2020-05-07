@@ -135,7 +135,6 @@ function Start() {
 	timeInterval = setInterval(startTimer, 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
 
-
 }
 
 function initPacmen() {
@@ -509,8 +508,8 @@ function UpdatePosition() {
 		img.src = "./images/drug.png";
 		img.setAttribute("height", "30");
 		img.setAttribute("width", "30");
-		var lives = document.getElementById("lblLives");
-		lives.appendChild(img);
+		var livesImg = document.getElementById("lblLives");
+		livesImg.appendChild(img);
 	}
 	board[shape.i][shape.j] = 2;
 	if (BallsAte == numOfBall) {
@@ -552,7 +551,7 @@ function gameOver() {
 	var message;
 	if (loseGame) {
 		message = "Loser!";
-		music  = new Audio('gameOver.mp3');
+		music  = new Audio('./music/gameOver.mp3');
 	}
 	else if (score < 100) {
 		message = "You are better than " + score+ " points!";
@@ -567,7 +566,7 @@ function gameOver() {
 
 function newGame() {
 	if(!playMusic){
-		startMusic = new Audio('startGame.mp3');
+		startMusic = new Audio('./music/startGame.mp3');
 		startMusic.play();
 		playMusic=true;
 	}

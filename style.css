@@ -8,11 +8,14 @@ body
 	font-family: "Raleway";
 	font-size: initial;
     text-align: center;
+    position: relative;
+    min-height: 100vh;
 
 }
 header{
     border: 1px solid rgb(117, 117, 117);
-    background-color: #f7c9dab7;
+    /*background-color: #f7c9dab7;*/
+    background-image: url("images/2.jpg");
 }
 #menu
 {
@@ -75,13 +78,15 @@ li :hover {
 }
 footer
 {
-	background-color: #f7c9dab7;
-	position: fixed;
+	/*background-color: #f7c9dab7;*/
+  position: absolute;
 	bottom: 0;
 	left: 0px;
 	width: 100%;
-    height: 40px;
-    text-align: center;
+  height: 2.5rem;
+      text-align: center;
+      border-top: 1px solid rgb(117, 117, 117);
+    background-image: url("images/2.jpg");
 } 
 .fa {
     padding: 2px;

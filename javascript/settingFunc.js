@@ -175,8 +175,14 @@ function randomNumberOfBalls(){
     var ballsNumber= '';
     for (var i = 0; i < 2; i++) {
         ballsNumber += numBalls[Math.floor(Math.random() * 5)];
-      }
-      return ballsNumber;
+    }
+    if(ballsNumber<50 || ballsNumber>90){
+        var min = Math.ceil(50);
+        var max = Math.floor(90);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+    else
+        return ballsNumber;
 }
 
 function randonNumberOfMonsters(){

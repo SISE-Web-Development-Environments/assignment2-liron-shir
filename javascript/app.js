@@ -25,10 +25,11 @@ var lives;
 var gameInterval;
 var pizza = { x: 21, y: 1, img: "./images/piz.png", xPrev: 21, yPrev: 1, active: true };
 var playMusic= false;
-var startMusic = new Audio('./music/startGame.mp3');
-var musicGameOver  = new Audio('./music/gameOver.mp3');
-var musicWin = new Audio('./music/winner.mp3');
+var playMusicGameOver = false;
+var startMusic;
+var musicGameOver;
 var timeOut;
+var stop=false;
 
 $(document).ready(function () {
 	context = canvas.getContext("2d");
@@ -52,6 +53,7 @@ function Start() {
 	BallsAte = 0;
 	loseGame = false;
 	timeOut = false;
+	stop = false;
 	pac_color = "red";
 	keys = gameKeys;
 	food_remain = numOfBall;
@@ -137,6 +139,7 @@ function Start() {
 	//intervalTime =  setTimeout(startTimer, 1000);
 	timeInterval = setInterval(startTimer, 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
+	setInterval(movingPizza, 1000);
 
 }
 
@@ -338,36 +341,35 @@ function DrawPizza() {
 	}
 }
 function bestMoveForPizza() {
-	var optionalSteps = new Array();
+	var optionalStepsPizza = new Array();
 	var min = Number.MIN_SAFE_INTEGER;
-	var bestMove;
-	var step;
-	var dis;
-	optionalSteps.push([pizza.x - 1, pizza.y]);
-	optionalSteps.push([pizza.x + 1, pizza.y]);
-	optionalSteps.push([pizza.x, pizza.y + 1]);
-	optionalSteps.push([pizza.x, pizza.y - 1]);
-	for (var i = 0; i < optionalSteps.length; i++) {
-		step = optionalSteps[i];
-		if (board[step[0]][step[1]] != 4) {
-			dis = Math.sqrt(Math.pow(step[0] - shape.i, 2) + Math.pow(step[1] - shape.j, 2));
-			if (dis > min && (pizza.xPrev != step[0] || pizza.yPrev != step[1])) {
-				min = dis;
-				bestMove = { x: step[0], y: step[1] };
+	var bestMovePizza;
+	var stepPizza;
+	var distance;
+	optionalStepsPizza.push([pizza.x - 1, pizza.y]);
+	optionalStepsPizza.push([pizza.x + 1, pizza.y]);
+	optionalStepsPizza.push([pizza.x, pizza.y + 1]);
+	optionalStepsPizza.push([pizza.x, pizza.y - 1]);
+	for (var i = 0; i < optionalStepsPizza.length; i++) {
+		stepPizza = optionalStepsPizza[i];
+		if (board[stepPizza[0]][stepPizza[1]] != 4) {
+			distance = Math.sqrt(Math.pow(stepPizza[0] - shape.i, 2) + Math.pow(stepPizza[1] - shape.j, 2));
+			if (distance > min && (pizza.xPrev != stepPizza[0] || pizza.yPrev != stepPizza[1])) {
+				min = distance;
+				bestMovePizza = { x: stepPizza[0], y: stepPizza[1] };
 			}
 		}
 	}
-	return bestMove;
+	return bestMovePizza;
 
 }
 
 function movingPizza(){
-	var best;
-	best = bestMoveForPizza();
+	var bestPizza = bestMoveForPizza();
 	pizza.xPrev=pizza.x;
 	pizza.yPrev=pizza.y;
-	pizza.x=best.x;
-	pizza.y=best.y;
+	pizza.x=bestPizza.x;
+	pizza.y=bestPizza.y;
 }
 
 function bestMoveForMonster(monster) {
@@ -394,9 +396,8 @@ function bestMoveForMonster(monster) {
 }
 
 function movingMonsters() {
-	var best;
 	for (var i = 0; i < numOfMonsters; i++) {
-		best = bestMoveForMonster(monsters[i]);
+		var best = bestMoveForMonster(monsters[i]);
 		monsters[i].xPrev = monsters[i].x;
 		monsters[i].yPrev = monsters[i].y;
 		monsters[i].x = best.x;
@@ -522,6 +523,7 @@ function UpdatePosition() {
 	pacmanMeetMonster();
 
 	if (BallsAte == numOfBall) {
+		timeOut = true;
 		gameOver();
 	} else {
 		Draw();
@@ -545,7 +547,7 @@ function showSettings() {
 /*timer of game*/
 function startTimer() {
 	limitTime--;
-	if (limitTime == 0) {
+	if (limitTime == 0 && !loseGame) {
 		timeOut= true;
 		gameOver();
 	}
@@ -554,31 +556,30 @@ function gameOver() {
 	startMusic.pause();
 	playMusic = false;
 	var message;
-	if (loseGame) {
-		message = "Loser!";
-		//musicGameOver = new Audio('./music/gameOver.mp3');
-
+	if(!stop){
+		if (loseGame) {
+			message = "Loser!";
+			musicGameOver = new Audio('./music/gameOver.mp3');
+		}
+		else if (timeOut && score < 100) {
+			message = "You are better than " + score + " points!";
+			musicGameOver = new Audio('./music/gameOver.mp3');
+		}
+		else if (timeOut) {
+			message = "Winner!!!";
+			musicGameOver=new Audio('./music/winner.mp3');
+		}
 		musicGameOver.play();
+		playMusicGameOver = true;
+		alert(message);
+		clearAll();
 	}
-	else if (timeOut && score < 100) {
-		message = "You are better than " + score + " points!";
-		musicGameOver.play();
-	}
-	else if (timeOut) {
-		message = "Winner!!!";
-		//musicWin=new Audio('./music/winner.mp3');
-		
-		musicWin.play();
-	}
-	
 
-	alert(message);
-	clearAll();
 }
 
 function newGame() {
 	clearAll();
-	if(loseGame || score<100)
+	if(playMusicGameOver)
 	  musicGameOver.pause();
 	if(!playMusic){
 		startMusic = new Audio('./music/startGame.mp3');
@@ -601,13 +602,14 @@ function clearAll(){
 	window.clearInterval(timeInterval);
 	window.clearInterval(gameInterval);
 	limitTime = 0;
+	stop= true;
 	keys = undefined;
 	
 }
 
 function stopGame(){
 	clearAll();
-	if(loseGame || score<100)
+	if(playMusicGameOver)
 	  musicGameOver.pause();
 	if(playMusic){
 	  startMusic.pause();

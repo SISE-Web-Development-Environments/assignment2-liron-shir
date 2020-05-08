@@ -556,24 +556,44 @@ function gameOver() {
 	startMusic.pause();
 	playMusic = false;
 	var message;
+	var imageOver=new Image();
 	if(!stop){
 		if (loseGame) {
 			message = "Loser!";
 			musicGameOver = new Audio('./music/gameOver.mp3');
+			imageOver.src ="./images/loser.png"
 		}
 		else if (timeOut && score < 100) {
 			message = "You are better than " + score + " points!";
 			musicGameOver = new Audio('./music/gameOver.mp3');
+			imageOver.src ="./images/loser.png"
 		}
 		else if (timeOut) {
 			message = "Winner!!!";
 			musicGameOver=new Audio('./music/winner.mp3');
+			imageOver.src ="./images/winner.png"
 		}
 		musicGameOver.play();
 		playMusicGameOver = true;
-		alert(message);
+		//alert(message);
 		clearAll();
+		//show image
+		context.clearRect(0,0,canvas.width,canvas.height);
+		context=canvas.getContext("2d");
+		
+		imageOver.onload=function(){
+		  	context.drawImage(imageOver,100,100,400,400);
+			context.font = "30px Verdana";
+			// Create gradient
+			var gradient = context.createLinearGradient(0, 0, canvas.width, 0);
+			gradient.addColorStop("0"," magenta");
+			gradient.addColorStop("0.5", "blue");
+			gradient.addColorStop("1.0", "red");
+			// Fill with gradient
+			context.fillStyle = gradient;
+			context.fillText(message, 210, 500);
 	}
+}
 
 }
 

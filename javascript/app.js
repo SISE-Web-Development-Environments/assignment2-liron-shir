@@ -66,7 +66,7 @@ function Start() {
 		[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
 		[4, 0, 4, 4, 4, 0, 4, 4, 4, 4, 0, 4, 0, 4, 4, 0, 4],
 		[4, 0, 4, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 4, 0, 0, 4],
-		[4, 0, 4, 0, 4, 0, 4, 0, 4, 4, 0, 4, 0, 4, 4, 0, 4],
+		[4, 0, 4, 0, 4, 0, 4, 0, 4, 4, 0, 4, 0, 4, 0, 0, 4],
 		[4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 4, 4, 0, 4],
 		[4, 0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4],
 		[4, 0, 4, 4, 4, 0, 4, 4, 4, 4, 0, 4, 0, 4, 4, 0, 4],
@@ -139,8 +139,6 @@ function Start() {
 	//intervalTime =  setTimeout(startTimer, 1000);
 	timeInterval = setInterval(startTimer, 1000);
 	gameInterval = setInterval(movingMonsters, 1000);
-	setInterval(movingPizza, 1000);
-
 }
 
 function initPacmen() {
@@ -521,6 +519,10 @@ function UpdatePosition() {
 	}
 	board[shape.i][shape.j] = 2;
 	pacmanMeetMonster();
+	if (pizza.x == shape.i && pizza.y == shape.j) {
+		score = score + 50;
+		pizza.active = false;
+	}
 
 	if (BallsAte == numOfBall) {
 		timeOut = true;
@@ -556,22 +558,26 @@ function gameOver() {
 	startMusic.pause();
 	playMusic = false;
 	var message;
+	var messageWidth;
 	var imageOver=new Image();
 	if(!stop){
 		if (loseGame) {
 			message = "Loser!";
-			musicGameOver = new Audio('./music/gameOver.mp3');
-			imageOver.src ="./images/loser.png"
+			musicGameOver = new Audio('./music/gameOver1.mp3');
+			imageOver.src ="./images/loser.png";
+			messageWidth =260;
 		}
 		else if (timeOut && score < 100) {
 			message = "You are better than " + score + " points!";
-			musicGameOver = new Audio('./music/gameOver.mp3');
-			imageOver.src ="./images/loser.png"
+			musicGameOver = new Audio('./music/gameOver2.mp3');
+			imageOver.src ="./images/scoreLose.png";
+			messageWidth =20;
 		}
 		else if (timeOut) {
 			message = "Winner!!!";
 			musicGameOver=new Audio('./music/winner.mp3');
-			imageOver.src ="./images/winner.png"
+			imageOver.src ="./images/winner.png";
+			messageWidth =220;
 		}
 		musicGameOver.play();
 		playMusicGameOver = true;
@@ -583,15 +589,15 @@ function gameOver() {
 		
 		imageOver.onload=function(){
 		  	context.drawImage(imageOver,100,100,400,400);
-			context.font = "30px Verdana";
+			context.font = "50px Verdana";
 			// Create gradient
 			var gradient = context.createLinearGradient(0, 0, canvas.width, 0);
-			gradient.addColorStop("0"," magenta");
-			gradient.addColorStop("0.5", "blue");
-			gradient.addColorStop("1.0", "red");
+			gradient.addColorStop("0"," black");
+			gradient.addColorStop("0.5", "red");
+			gradient.addColorStop("1", "black");
 			// Fill with gradient
 			context.fillStyle = gradient;
-			context.fillText(message, 210, 500);
+			context.fillText(message, messageWidth, 540);
 	}
 }
 

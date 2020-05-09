@@ -77,6 +77,7 @@ $().ready(function () {
             numOfBall = $("#numberOfBalls").val();
             timeOfGame = $("#timeOfGame").val();
             numOfMonsters = $("#numberOfMonsters").val();
+            clearAllSettingsFields();
             newGame();
         }
     });
@@ -203,9 +204,14 @@ function getRandomColor() {
     return color;
   }
 
-  function initSetting(){
-
-    
+  function clearAllSettingsFields(){
+    $("#up").val("");
+    $("#down").val("");
+    $("#left").val("");
+    $("#right").val("");
+    $("#numberOfBalls").val(50);
+    $("#timeOfGame").val(60);
+    $("#numberOfMonsters").val(1);  
   }
 
 

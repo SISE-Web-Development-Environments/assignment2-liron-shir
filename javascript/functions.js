@@ -59,7 +59,6 @@ function loginButton() {
     if (users[i].username === userCheck) {
       if (users[i].password === passwordCheck) {
         user = users[i];
-        alert("Succeeded");
         clearFiledsLogin()
         setting();
         return;

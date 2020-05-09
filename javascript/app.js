@@ -611,6 +611,11 @@ function newGame() {
 		startMusic = new Audio('./music/startGame.mp3');
 		startMusic.play();
 		playMusic=true;
+	}else{
+		startMusic.pause();
+		startMusic = new Audio('./music/startGame.mp3');
+		startMusic.play();
+
 	}
 
 	initMonsters();

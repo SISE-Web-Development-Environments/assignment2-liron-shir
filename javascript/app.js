@@ -138,7 +138,7 @@ function Start() {
 	interval = setInterval(UpdatePosition, 150);
 	//intervalTime =  setTimeout(startTimer, 1000);
 	timeInterval = setInterval(startTimer, 1000);
-	gameInterval = setInterval(movingMonsters, 1000);
+	gameInterval = setInterval(movingMonsters, 600);
 }
 
 function initPacmen() {

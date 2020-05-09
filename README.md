@@ -1,6 +1,8 @@
 # Assignment2
  
- מגישות: לירון בן יעקב- 204385884 ושיר בן דור 204675797
+ מגישות: 
+ לירון בן יעקב 204385884 
+ שיר בן דור 204675797
 
  
 כתובת האתר: https://sise-web-development-environments.github.io/assignment2-liron-shir/
